@@ -7,13 +7,25 @@ import ToneLab from './components/ToneLab'
 import WordMode from './components/WordMode'
 import MemoryGame from './components/MemoryGame'
 import Challenge from './components/Challenge'
+import TalkMode from './components/TalkMode'
+import PatternDrill from './components/PatternDrill'
 import { useProgress } from './hooks/useProgress'
 import { buildStepQuiz, buildReviewQuiz } from './lib/quiz'
 import { stepMeta, TONE_STEP } from './data/steps'
 
 export default function App() {
-  const { progress, recordAnswer, finishStep, noteCombo, noteChallenge, reset, dismissMigration } = useProgress()
-  // view: { name: 'map' | 'cards' | 'quiz' | 'lab' | 'review' | 'words' | 'memory' | 'challenge', step?, questions? }
+  const {
+    progress,
+    recordAnswer,
+    recordPhrase,
+    finishStep,
+    finishScene,
+    noteCombo,
+    noteChallenge,
+    reset,
+    dismissMigration,
+  } = useProgress()
+  // view: { name: 'map' | 'cards' | 'quiz' | 'lab' | 'review' | 'words' | 'memory' | 'challenge' | 'talk' | 'pattern', step?, questions? }
   const [view, setView] = useState({ name: 'map' })
 
   // 一度でも解答した文字のID集合(単語モード/神経衰弱の出題範囲に使う)
@@ -56,7 +68,24 @@ export default function App() {
             onWords={() => setView({ name: 'words', key: Date.now() })}
             onMemory={() => setView({ name: 'memory', key: Date.now() })}
             onChallenge={() => setView({ name: 'challenge', key: Date.now() })}
+            onTalk={() => setView({ name: 'talk', key: Date.now() })}
+            onPattern={() => setView({ name: 'pattern', key: Date.now() })}
           />
+        )}
+
+        {view.name === 'talk' && (
+          <TalkMode
+            key={view.key}
+            phraseStats={progress.phrases}
+            onBack={goMap}
+            onAnswer={recordAnswer}
+            onPhrase={recordPhrase}
+            onSceneDone={finishScene}
+          />
+        )}
+
+        {view.name === 'pattern' && (
+          <PatternDrill key={view.key} onBack={goMap} onAnswer={recordAnswer} />
         )}
 
         {view.name === 'words' && (

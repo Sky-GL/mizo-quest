@@ -6,6 +6,8 @@ export const emptyProgress = () => ({
   xp: 0,
   steps: {},   // { [step]: { cleared, bestScore, stars, plays } }
   chars: {},   // { [id]: { correct, wrong, lastSeen, streak } }
+  phrases: {}, // { [phraseId]: { correct, wrong, lastSeen } } 会話フレーズの成績
+  scenes: {},  // { [sceneId]: { done, plays } } 会話シーンの到達状況
   streak: { count: 0, lastDate: null },
   bestCombo: 0,
   bestChallenge: 0, // 4択チャレンジの自己ベストスコア

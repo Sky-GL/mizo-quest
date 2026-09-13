@@ -1,4 +1,7 @@
 import { STEPS, charsOfStep } from '../data/steps'
+import { SCENES } from '../data/talk'
+
+const SCENE_TOTAL = SCENES.length
 
 const Stars = ({ n }) => (
   <span className="stars">
@@ -8,9 +11,11 @@ const Stars = ({ n }) => (
   </span>
 )
 
-export default function StepMap({ progress, onSelect, onReview, onWords, onMemory, onChallenge }) {
+export default function StepMap({ progress, onSelect, onReview, onWords, onMemory, onChallenge, onTalk, onPattern }) {
   const learnedCount = Object.values(progress.chars).length
   const weakCount = Object.values(progress.chars).filter((c) => c.wrong > 0).length
+  const sceneDone = Object.values(progress.scenes || {}).filter((s) => s.done).length
+  const phraseCount = Object.values(progress.phrases || {}).filter((p) => p.correct > 0).length
 
   return (
     <div className="stepmap">
@@ -24,10 +29,30 @@ export default function StepMap({ progress, onSelect, onReview, onWords, onMemor
           <strong>復習モード</strong>
           <span className="sub">
             学習済み {learnedCount} 字 / 苦手 {weakCount} 字 — 間違えた字を優先出題
+            {phraseCount > 0 && ` ・会話フレーズ ${phraseCount} 個`}
           </span>
         </div>
         <button className="btn primary" disabled={learnedCount === 0} onClick={onReview}>
           {learnedCount === 0 ? 'Step1から始めよう' : '苦手を復習する'}
+        </button>
+      </div>
+
+      {/* 会話は発音学習の出口なので、他のモードより先に置く */}
+      <div className="mode-row talk-row">
+        <button className="mode-card talk" onClick={onTalk}>
+          <span className="mode-emoji">💬</span>
+          <strong>会話モード</strong>
+          <span className="mode-sub">
+            6場面。聞く→選ぶ→自分で組み立てる。
+            {sceneDone ? ` ${sceneDone}/${SCENE_TOTAL} 場面クリア` : ' まずは「あいさつ」から'}
+          </span>
+        </button>
+        <button className="mode-card pattern" onClick={onPattern}>
+          <span className="mode-emoji">🧩</span>
+          <strong>パターン練習</strong>
+          <span className="mode-sub">
+            主語・否定・質問の3つの型。覚えた文を自分で作り変えられるようになる
+          </span>
         </button>
       </div>
 

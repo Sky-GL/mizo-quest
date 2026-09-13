@@ -1,0 +1,28 @@
+{"id":"chibai","mizo":"Chibai!","kana":"チバイ","ja":"こんにちは!","literal":"あいさつ","note":"朝も夜も、初対面でも友達でもこれ一つ。CHは「チャ」の子音。","scene":"greet","level":1}
+{"id":"i_dam_em","mizo":"I dam em?","kana":"イ ダム エム","ja":"元気?","literal":"あなたは・健康だ・か","note":"dam=健康。i=あなた。文末の em が「〜か?」を作る。","scene":"greet","level":1}
+{"id":"ka_dam_e","mizo":"Ka dam e.","kana":"カ ダム エ","ja":"元気だよ。","literal":"私は・健康だ・よ","note":"ka=私。文末の e は「〜だよ」と言い切る印。","scene":"greet","level":1}
+{"id":"nangmah","mizo":"Nangmah?","kana":"ナンマ","ja":"あなたは?","literal":"あなたは?","note":"聞き返すときの一言。nang=あなた の強調形。","scene":"greet","level":1}
+{"id":"ka_lawm_e","mizo":"Ka lawm e.","kana":"カ ロム エ","ja":"ありがとう。","literal":"私は・うれしい・よ","note":"★AWが入る最重要フレーズ。lawm=うれしい。「私はうれしい」でお礼になる。ロムの「ロ」は口を丸めた /ɔ/。","scene":"greet","level":1}
+{"id":"kan_inhmu","mizo":"Kan inhmu leh ang.","kana":"カン インフム レ アン","ja":"また会いましょう。","literal":"私たちは・会う・また・しよう","note":"別れぎわに。kan=私たち。leh=また。ang=〜しよう。","scene":"greet","level":2}
+{"id":"i_hming","mizo":"I hming eng nge?","kana":"イ フミン エン ンゲ","ja":"お名前は?","literal":"あなたの・名前・何・か","note":"hming=名前。eng=何。nge は「何/どこ/誰」とセットで使う疑問の印。","scene":"name","level":1}
+{"id":"ka_hming","mizo":"Ka hming chu Sugai a ni.","kana":"カ フミン チュ スガイ ア ニ","ja":"私の名前はスガイです。","literal":"私の・名前・は・スガイ・である","note":"chu=〜は。a ni=〜である。名前の部分を自分のものに差し替えて使う。","scene":"name","level":1}
+{"id":"japan_mi","mizo":"Japan mi ka ni.","kana":"ジャパン ミ カ ニ","ja":"私は日本人です。","literal":"日本・人・私は・である","note":"mi=人。「日本人 私は である」の語順になるのがミゾ語らしいところ。","scene":"name","level":2}
+{"id":"a_ni","mizo":"A ni.","kana":"ア ニ","ja":"はい / そうです。","literal":"それは・である","note":"ミゾ語には単独の「はい」がない。A ni(そうです)で受ける。","scene":"name","level":1}
+{"id":"a_ni_lo","mizo":"A ni lo.","kana":"ア ニ ロ","ja":"いいえ / ちがいます。","literal":"それは・である・ない","note":"★否定の lo は動詞の後ろ。この位置さえ覚えれば否定文が全部作れる。","scene":"name","level":1}
+{"id":"a_tha_e","mizo":"A ṭha e.","kana":"ア タ エ","ja":"いいですね。/ 大丈夫。","literal":"それは・よい・よ","note":"★Ṭ。舌を反らせたT。ṭha=よい。お礼への返事、相づち、承諾に広く使える。","scene":"thanks","level":1}
+{"id":"khawngaihin","mizo":"Khawngaihin.","kana":"コンガイヒン","ja":"お願いします。/ すみません。","literal":"どうか","note":"★AWとNGが両方入る。頼みごとの前に添える。","scene":"thanks","level":2}
+{"id":"min_pui_rawh","mizo":"Min pui rawh.","kana":"ミン プイ ロ","ja":"助けてください。","literal":"私を・助ける・ください","note":"min=私を(目的語の私)。ka=私は との違いに注意。rawh=〜してください。","scene":"thanks","level":2}
+{"id":"min_ngaihdam","mizo":"Min ngaihdam rawh.","kana":"ミン ンガイダム ロ","ja":"ごめんなさい。","literal":"私を・許す・ください","note":"★NGが語頭に立つ。日本語の「ン」から言い始める感覚。","scene":"thanks","level":2}
+{"id":"chaw_i_ei","mizo":"Chaw i ei em?","kana":"チョ イ エイ エム","ja":"ごはん食べる?","literal":"ごはん・あなたは・食べる・か","note":"chaw=ごはん/食事。★AW。目的語が先に出て、主語+動詞が後ろに来る。","scene":"food","level":2}
+{"id":"aw_ka_ei","mizo":"Aw, ka ei dawn.","kana":"オ カ エイ ドン","ja":"うん、食べます。","literal":"うん・私は・食べる・つもり","note":"Aw だけで「うん」。dawn=これから〜する。★AWが2回。","scene":"food","level":2}
+{"id":"a_tui_e","mizo":"A tui e!","kana":"ア トゥイ エ","ja":"おいしい!","literal":"それは・おいしい・よ","note":"tui は「水」でもあり「おいしい」でもある。文脈で分かれる。","scene":"food","level":1}
+{"id":"tui_ka_duh","mizo":"Tui ka duh.","kana":"トゥイ カ ドゥ","ja":"水がほしい。","literal":"水・私は・ほしい","note":"duh=ほしい/好き。うしろに lo を足せば「いらない」になる。","scene":"food","level":1}
+{"id":"ka_duh_lo","mizo":"Ka duh lo.","kana":"カ ドゥ ロ","ja":"いりません。","literal":"私は・ほしい・ない","note":"断るとき。lo を付けるだけで否定になる。","scene":"food","level":1}
+{"id":"engzat_nge","mizo":"Hei hi engzat nge?","kana":"ヘイ ヒ エンザット ンゲ","ja":"これはいくらですか?","literal":"これ・は・いくら・か","note":"hei hi=これ。engzat=いくら。中身を聞く質問なので nge を使う。","scene":"shop","level":2}
+{"id":"sawm_a_ni","mizo":"Sawm a ni.","kana":"ソム ア ニ","ja":"10です。","literal":"10・それは・である","note":"数は pakhat(1) pahnih(2) pathum(3) … sawm(10)。単語モードで練習したもの。★AW。","scene":"shop","level":2}
+{"id":"a_to_lutuk","mizo":"A to lutuk e.","kana":"ア ト ルトゥック エ","ja":"高すぎます。","literal":"それは・高い・すぎる・よ","note":"to=(値段が)高い。lutuk=〜すぎる。市場での決まり文句。","scene":"shop","level":3}
+{"id":"ka_lei_ang","mizo":"Ka lei ang.","kana":"カ レイ アン","ja":"買います。","literal":"私は・買う・だろう","note":"lei=買う。ang=〜しよう/だろう。kan inhmu leh ang と同じ ang。","scene":"shop","level":2}
+{"id":"ka_hre_lo","mizo":"Ka hre lo.","kana":"カ フレ ロ","ja":"わかりません。","literal":"私は・知る・ない","note":"知る=hria だが、lo が付くと hre に変わる。ミゾ語によくある形の変化。","scene":"trouble","level":1}
+{"id":"mizo_tawng","mizo":"Mizo ṭawng ka thiam lo.","kana":"ミゾ トン カ ティアム ロ","ja":"ミゾ語は話せません。","literal":"ミゾ・語・私は・できる・ない","note":"★Ṭ と AW が同時に来る ṭawng(言語)。この語が言えたら発音の山は越えている。","scene":"trouble","level":2}
+{"id":"zawi_zawkin","mizo":"Zawi zawkin sawi rawh.","kana":"ゾイ ゾキン ソイ ロ","ja":"ゆっくり話してください。","literal":"ゆっくり・もっと・話す・ください","note":"zawk=もっと〜。sawi=話す。★AWが3回出るので、AWの練習にちょうどいい。","scene":"trouble","level":3}
+{"id":"english_thiam","mizo":"English i thiam em?","kana":"イングリッシュ イ ティアム エム","ja":"英語できますか?","literal":"英語・あなたは・できる・か","note":"通じないときの保険。ミゾラムでは英語が広く通じる。","scene":"trouble","level":2}
