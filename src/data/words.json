@@ -1,42 +1,40 @@
-{"id":"pakhat","word":"pakhat","kana":"パカット","meaning":"1(ひとつ)","chars":["p","a","k","h","a","fin_t"],"level":1}
-{"id":"pahnih","word":"pahnih","kana":"パフニ","meaning":"2(ふたつ)","chars":["p","a","h","n","i","fin_h"],"level":1}
-{"id":"pathum","word":"pathum","kana":"パトゥム","meaning":"3(みっつ)","chars":["p","a","t","h","u","fin_m"],"level":1}
-{"id":"pali","word":"pali","kana":"パリ","meaning":"4(よっつ)","chars":["p","a","l","i"],"level":1}
-{"id":"panga","word":"panga","kana":"パンガ","meaning":"5(いつつ)","chars":["p","a","ng","a"],"level":1}
-{"id":"paruk","word":"paruk","kana":"パルック","meaning":"6(むっつ)","chars":["p","a","r","u","fin_k"],"level":1}
-{"id":"pasarih","word":"pasarih","kana":"パサリ","meaning":"7(ななつ)","chars":["p","a","s","a","r","i","fin_h"],"level":1}
-{"id":"pariat","word":"pariat","kana":"パリアット","meaning":"8(やっつ)","chars":["p","a","r","i","a","fin_t"],"level":1}
-{"id":"pakua","word":"pakua","kana":"パクア","meaning":"9(ここのつ)","chars":["p","a","k","u","a"],"level":1}
-{"id":"sawm","word":"sawm","kana":"ソーム","meaning":"10(とお)","chars":["s","aw","fin_m"],"level":1}
-
-{"id":"chibai","word":"chibai","kana":"チバイ","meaning":"こんにちは / やあ","chars":["ch","i","b","a","i"],"level":1}
-{"id":"mangtha","word":"mang tha","kana":"マンタ","meaning":"おやすみ / さようなら","chars":["m","a","ng","t","h","a"],"level":1}
-{"id":"kalawme","word":"ka lawm e","kana":"カ ローム エ","meaning":"ありがとう","chars":["k","a","l","aw","fin_m","e"],"level":2}
-{"id":"idamem","word":"i dam em?","kana":"イ ダム エム","meaning":"元気ですか?","chars":["i","d","a","fin_m","e","fin_m"],"level":2}
-{"id":"zingchibai","word":"zing chibai","kana":"ジン チバイ","meaning":"おはよう","chars":["z","i","ng","ch","i","b","a","i"],"level":2}
-{"id":"tlailamchibai","word":"tlailam chibai","kana":"トライラム チバイ","meaning":"こんばんは","chars":["t","l","a","i","l","a","fin_m","ch","i","b","a","i"],"level":2}
-
-{"id":"tawng","word":"ṭawng","kana":"トーン(そり舌)","meaning":"言語・ことば","chars":["tt","aw","fin_ng"],"level":2}
-{"id":"mizo","word":"Mizo","kana":"ミゾ","meaning":"ミゾ(民族・人)","chars":["m","i","z","o"],"level":1}
-{"id":"mizoram","word":"Mizoram","kana":"ミゾラム","meaning":"ミゾラム(州の名)","chars":["m","i","z","o","r","a","fin_m"],"level":1}
-{"id":"dam","word":"dam","kana":"ダム","meaning":"元気な・健康な","chars":["d","a","fin_m"],"level":1}
-{"id":"tha","word":"tha","kana":"タ","meaning":"よい","chars":["t","h","a"],"level":1}
-{"id":"lawm","word":"lawm","kana":"ローム","meaning":"喜ぶ・感謝する","chars":["l","aw","fin_m"],"level":1}
-{"id":"ka","word":"ka","kana":"カ","meaning":"私の / 私が","chars":["k","a"],"level":1}
-{"id":"i","word":"i","kana":"イ","meaning":"あなたの / あなたが","chars":["i"],"level":1}
-{"id":"ni","word":"ni","kana":"ニ","meaning":"日・太陽","chars":["n","i"],"level":1}
-{"id":"tui","word":"tui","kana":"トゥイ","meaning":"水","chars":["t","u","i"],"level":1}
-{"id":"chaw","word":"chaw","kana":"チョー","meaning":"食べ物・ごはん","chars":["ch","aw"],"level":1}
-{"id":"in","word":"in","kana":"イン","meaning":"家","chars":["i","fin_n"],"level":1}
-{"id":"lal","word":"lal","kana":"ラル","meaning":"王・首長","chars":["l","a","fin_l"],"level":1}
-{"id":"ram","word":"ram","kana":"ラム","meaning":"土地・国","chars":["r","a","fin_m"],"level":1}
-{"id":"puan","word":"puan","kana":"プアン","meaning":"プアン(伝統の織物)","chars":["p","u","a","fin_n"],"level":2}
-{"id":"va","word":"va","kana":"ヴァ","meaning":"鳥","chars":["v","a"],"level":1}
-{"id":"sa","word":"sa","kana":"サ","meaning":"肉・動物","chars":["s","a"],"level":1}
-{"id":"zu","word":"zu","kana":"ズ","meaning":"酒","chars":["z","u"],"level":1}
-{"id":"fak","word":"fak","kana":"ファック","meaning":"ほめる","chars":["f","a","fin_k"],"level":2}
-{"id":"hmangaihna","word":"hmangaihna","kana":"フマンガイナ","meaning":"愛","chars":["h","m","a","ng","a","i","h","n","a"],"level":2}
-{"id":"nula","word":"nula","kana":"ヌラ","meaning":"若い女性","chars":["n","u","l","a"],"level":2}
-{"id":"tlangval","word":"tlangval","kana":"トラングヴァル","meaning":"若い男性","chars":["t","l","a","ng","v","a","fin_l"],"level":2}
-{"id":"kohhran","word":"kohhran","kana":"コーラン","meaning":"教会","chars":["k","o","h","h","r","a","fin_n"],"level":2}
-{"id":"lehkhabu","word":"lehkhabu","kana":"レカブ","meaning":"本","chars":["l","e","h","k","h","a","b","u"],"level":2}
+{"id": "pakhat", "word": "pakhat", "kana": "パカット", "meaning": "1(ひとつ)", "chars": ["p", "a", "k", "h", "a", "fin_t"], "level": 1}
+{"id": "pahnih", "word": "pahnih", "kana": "パフニ", "meaning": "2(ふたつ)", "chars": ["p", "a", "h", "n", "i", "fin_h"], "level": 1}
+{"id": "pathum", "word": "pathum", "kana": "パトゥム", "meaning": "3(みっつ)", "chars": ["p", "a", "t", "h", "u", "fin_m"], "level": 1}
+{"id": "pali", "word": "pali", "kana": "パリ", "meaning": "4(よっつ)", "chars": ["p", "a", "l", "i"], "level": 1}
+{"id": "panga", "word": "panga", "kana": "パンガ", "meaning": "5(いつつ)", "chars": ["p", "a", "ng", "a"], "level": 1}
+{"id": "paruk", "word": "paruk", "kana": "パルック", "meaning": "6(むっつ)", "chars": ["p", "a", "r", "u", "fin_k"], "level": 1}
+{"id": "pasarih", "word": "pasarih", "kana": "パサリ", "meaning": "7(ななつ)", "chars": ["p", "a", "s", "a", "r", "i", "fin_h"], "level": 1}
+{"id": "pariat", "word": "pariat", "kana": "パリアット", "meaning": "8(やっつ)", "chars": ["p", "a", "r", "i", "a", "fin_t"], "level": 1}
+{"id": "pakua", "word": "pakua", "kana": "パクア", "meaning": "9(ここのつ)", "chars": ["p", "a", "k", "u", "a"], "level": 1}
+{"id": "sawm", "word": "sawm", "kana": "ソム", "meaning": "10(とお)", "chars": ["s", "aw", "fin_m"], "level": 1}
+{"id": "chibai", "word": "chibai", "kana": "チバイ", "meaning": "こんにちは / やあ", "chars": ["ch", "i", "b", "a", "i"], "level": 1}
+{"id": "mangtha", "word": "Mangṭha", "kana": "マンタ(そり舌)", "meaning": "さようなら", "chars": ["m", "a", "ng", "tt", "h", "a"], "level": 1}
+{"id": "kalawme", "word": "ka lawm e", "kana": "カ ロム エ", "meaning": "ありがとう", "chars": ["k", "a", "l", "aw", "fin_m", "e"], "level": 2}
+{"id": "idamem", "word": "i dam em?", "kana": "イ ダム エム", "meaning": "元気ですか?", "chars": ["i", "d", "a", "fin_m", "e", "fin_m"], "level": 2}
+{"id": "zingchibai", "word": "zing chibai", "kana": "ジン チバイ", "meaning": "おはよう", "chars": ["z", "i", "ng", "ch", "i", "b", "a", "i"], "level": 2}
+{"id": "tlailamchibai", "word": "tlailam chibai", "kana": "トライラム チバイ", "meaning": "こんばんは", "chars": ["t", "l", "a", "i", "l", "a", "fin_m", "ch", "i", "b", "a", "i"], "level": 2}
+{"id": "tawng", "word": "ṭawng", "kana": "トン(そり舌)", "meaning": "言語・ことば", "chars": ["tt", "aw", "fin_ng"], "level": 2}
+{"id": "mizo", "word": "Mizo", "kana": "ミゾ", "meaning": "ミゾ(民族・人)", "chars": ["m", "i", "z", "o"], "level": 1}
+{"id": "mizoram", "word": "Mizoram", "kana": "ミゾラム", "meaning": "ミゾラム(州の名)", "chars": ["m", "i", "z", "o", "r", "a", "fin_m"], "level": 1}
+{"id": "dam", "word": "dam", "kana": "ダム", "meaning": "元気な・健康な", "chars": ["d", "a", "fin_m"], "level": 1}
+{"id": "tha", "word": "ṭha", "kana": "タ(そり舌)", "meaning": "よい", "chars": ["tt", "h", "a"], "level": 1}
+{"id": "lawm", "word": "lawm", "kana": "ロム", "meaning": "喜ぶ・感謝する", "chars": ["l", "aw", "fin_m"], "level": 1}
+{"id": "ka", "word": "ka", "kana": "カ", "meaning": "私の / 私が", "chars": ["k", "a"], "level": 1}
+{"id": "i", "word": "i", "kana": "イ", "meaning": "あなたの / あなたが", "chars": ["i"], "level": 1}
+{"id": "ni", "word": "ni", "kana": "ニ", "meaning": "日・太陽", "chars": ["n", "i"], "level": 1}
+{"id": "tui", "word": "tui", "kana": "トゥイ", "meaning": "水", "chars": ["t", "u", "i"], "level": 1}
+{"id": "chaw", "word": "chaw", "kana": "チョ", "meaning": "食べ物・ごはん", "chars": ["ch", "aw"], "level": 1}
+{"id": "in", "word": "in", "kana": "イン", "meaning": "家", "chars": ["i", "fin_n"], "level": 1}
+{"id": "lal", "word": "lal", "kana": "ラル", "meaning": "王・首長", "chars": ["l", "a", "fin_l"], "level": 1}
+{"id": "ram", "word": "ram", "kana": "ラム", "meaning": "土地・国", "chars": ["r", "a", "fin_m"], "level": 1}
+{"id": "puan", "word": "puan", "kana": "プアン", "meaning": "プアン(伝統の織物)", "chars": ["p", "u", "a", "fin_n"], "level": 2}
+{"id": "vawiin", "word": "vawiin", "kana": "ヴォイン", "meaning": "今日", "chars": ["v", "aw", "i", "i", "fin_n"], "level": 1}
+{"id": "sa", "word": "sa", "kana": "サ", "meaning": "肉・動物", "chars": ["s", "a"], "level": 1}
+{"id": "zu", "word": "zu", "kana": "ズ", "meaning": "酒", "chars": ["z", "u"], "level": 1}
+{"id": "fak", "word": "fak", "kana": "ファック", "meaning": "ほめる", "chars": ["f", "a", "fin_k"], "level": 2}
+{"id": "hmangaihna", "word": "hmangaihna", "kana": "フマンガイナ", "meaning": "愛", "chars": ["h", "m", "a", "ng", "a", "i", "h", "n", "a"], "level": 2}
+{"id": "nula", "word": "nula", "kana": "ヌラ", "meaning": "若い女性", "chars": ["n", "u", "l", "a"], "level": 2}
+{"id": "tlangval", "word": "tlangval", "kana": "トラングヴァル", "meaning": "若い男性", "chars": ["t", "l", "a", "ng", "v", "a", "fin_l"], "level": 2}
+{"id": "kohhran", "word": "kohhran", "kana": "コフラン", "meaning": "教会", "chars": ["k", "o", "h", "h", "r", "a", "fin_n"], "level": 2}
+{"id": "lehkhabu", "word": "lehkhabu", "kana": "レカブ", "meaning": "本", "chars": ["l", "e", "h", "k", "h", "a", "b", "u"], "level": 2}

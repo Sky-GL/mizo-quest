@@ -111,6 +111,23 @@
 `Dar engzat nge?`(何時)、`damdawi`(薬)、`Engtikah nge?`(いつ)、`Kan inhmu dawn nia`(また会いましょう)。
 新しく足したもの: `Mangṭha`(さようなら)、`Muttui le`(おやすみ)、`Min hrilh rawh`(教えてください)。
 
+### 単語40語の照合でわかって直したこと
+
+| 直す前 | 直した後 | 根拠 |
+|---|---|---|
+| `tha`(よい) | **`ṭha`** | Ṭ付きが正しい。用例 "Chhia leh **ṭha** hriatna"(善悪の知識)。**このアプリはStep4でŤを教えているのに、単語側で綴りを間違えていた** |
+| `mang tha`(おやすみ/さようなら) | **`Mangṭha`**(さようなら) | 1語・Ṭ付き。おやすみは `Muttui le` なので意味から外した |
+| `va`(鳥) | **`vawiin`**(今日) | va 単独の用例が確認できず。確認済みの vawiin に差し替え(V と AW の両方が入るので教材としても有効) |
+| カナ `ソーム` `ローム` `チョー` `トーン` `コーラン` | `ソム` `ロム` `チョ` `トン` `コフラン` | AW は短い /ɔ/ なので長音符は不適切。会話モード側の表記に揃えた |
+
+数詞10語(pakhat〜sawm)、`puan`(布)、`zu`(米の酒)、`sa`(肉)、`lal`(首長)、`ram`(土地)、
+`in`(家)、`ni`(日)、`fak`(ほめる。賛美歌 "Zaiin ka fak ang che")、`hmangaihna`(愛)、
+`nula`/`tlangval`(若い女性/男性)、`kohhran`(教会)、`lehkhabu`(本)、`ṭawng`(言語)、
+`Mizoram`(mi=人 + zo=高地 + ram=土地)は用例で確認済み。
+
+文字データ側も1か所直しました。Ṭ の説明に「英語話者には tr のように聞こえると
+説明される」を追記(Mizo alphabet の記述に基づく)。
+
 ### 参照した資料
 
 - [Mizo grammar (Wikipedia)](https://en.wikipedia.org/wiki/Mizo_grammar) — 人称接辞 ka/i/a/kan/in/an、否定の lo、疑問詞
@@ -123,6 +140,11 @@
 - [Chhangte, The Grammar of Simple Clauses in Mizo (ANU)](https://openresearch-repository.anu.edu.au/server/api/core/bitstreams/ad4a4545-9a90-4681-ba5a-de39615cf505/content) — 指示詞・節構造
 - [Daily Bread Mizo: Khawiah nge i awm?](https://dailybreadmizo.com/2019/05/15/khawiah-nge-i-awm/) — khawiah nge + awm の用例
 - [Mizo - Travel Phrases](https://www.travelphrases.info/languages/mizo.htm) — 距離・移動の言い方
+- [Mizo alphabet (Wikipedia)](https://en.wikipedia.org/wiki/Mizo_alphabet) — Ṭ の位置づけと音
+- [Calm-Sojourner: Let's count numbers in Mizo tawng](https://azassk.blogspot.com/2013/06/lets-count-numbers-in-mizo-tawng.html) — 数詞
+- [Mizo clothing (Wikipedia)](https://en.wikipedia.org/wiki/Mizo_clothing) — puan(布)
+- [Zû (beverage) (Wikipedia)](https://en.wikipedia.org/wiki/Z%C3%BB_(beverage)) — zu(米の酒)
+- [Mizo Structure (CIIL)](http://lisindia.ciil.org/Mizo/Mizo_struct.html) — in(家)+ -ah の用例、語順
 
 ## 開発
 
