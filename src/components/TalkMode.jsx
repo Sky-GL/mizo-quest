@@ -60,6 +60,7 @@ export default function TalkMode({ phraseStats, sceneStats, onBack, onAnswer, on
 function SceneList({ phraseStats, sceneStats, onBack, onSelect }) {
   // 相づち(A ṭha e など)は複数の場面で共有されるので、場面ごとの合計ではなく実数で数える
   const totalPhrases = ALL_PHRASES.length
+  const uncertainCount = ALL_PHRASES.filter((p) => p.uncertain).length
   const doneScenes = SCENES.filter((s) => sceneStats[s.id]?.done).length
 
   return (
@@ -115,9 +116,11 @@ function SceneList({ phraseStats, sceneStats, onBack, onSelect }) {
         2つを現地の音で言えるだけで会話の入り口がまるで変わります。まずは「あいさつ」から。
       </p>
       <p className="talk-note warn">
-        ⚠️ 収録したフレーズは<strong>話者による検証を受けていません</strong>。
-        確度が下がるものには<strong>「要確認」</strong>の印を付けてあります(各場面の「聞く」で確認できます)。
-        文法の型(主語・否定・質問)のほうは記述として確かなので、そちらを軸にすると崩れにくいです。
+        ⚠️ フレーズは公開されているミゾ語の資料と照合しています(用例が見つかった言い回しを採用)。
+        ただし<strong>母語話者による確認は取れていません</strong>。
+        照合で用例が見つからなかった {uncertainCount} 件には<strong>「要確認」</strong>の印を付けてあります
+        (各場面の「聞く」で確認できます)。文法の型(主語・否定・質問)は文法記述で裏が取れているので、
+        そちらを軸にすると崩れにくいです。
       </p>
     </div>
   )
@@ -235,7 +238,7 @@ function ReadStage({ scene, phrases, onNext }) {
                 <div className="ph-kana">{p.kana}</div>
               </div>
               <div className="ph-right">
-                {p.uncertain && <span className="ph-flag" title="話者による確認が取れていない言い回し">要確認</span>}
+                {p.uncertain && <span className="ph-flag" title="公開資料で同じ言い回しの用例が見つからなかったもの">要確認</span>}
                 <span className="ph-ja">{p.ja}</span>
                 <span className="ph-caret">{open === p.id ? '−' : '+'}</span>
               </div>
@@ -246,7 +249,8 @@ function ReadStage({ scene, phrases, onNext }) {
                 <p className="ph-note">{p.note}</p>
                 {p.uncertain && (
                   <p className="ph-warn">
-                    ⚠️ この言い回しは話者の確認が取れていません。通じなければ現地の言い方に合わせてください。
+                    ⚠️ 公開資料の照合で同じ言い回しの用例が見つかりませんでした。
+                    語の意味と組み立て方は確認できていますが、これが自然な言い方かは未確認です。
                   </p>
                 )}
                 <SpeakButton text={p.mizo} size="sm" />

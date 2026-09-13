@@ -82,16 +82,47 @@
 - カナ表記と調音の説明は日本語話者向けの便宜的なもので、音声学的に厳密ではありません
 - **声調の具体的な音高と単語ごとの声調は収録していません。** 実際の発音は
   ミゾ語話者の音で確認してください
-- **会話フレーズは話者による検証を受けていません。** 55フレーズのうち
-  確度が下がる15個には、アプリ内に**「要確認」の印**を付けてあります
-  (`phrases.json` の `uncertain: true`)。印が付いているのは
-  `Min ngaihdam rawh`(ごめんなさい)の目的語の形、`Chutah a awm`(あそこにあります)、
-  `A hla em?`(遠いですか)、`Khua a lum / vot`(暑い/寒い)、`Dam takin`(お元気で)、
-  `Zan ṭha`(おやすみ)、`Ka lu a na`(頭が痛い)など。
-  Chibai / Ka lawm e / I dam em? / A ni・A ni lo / Ka hre lo といった
-  基本のあいさつは各種の記述で一致しており、印は付けていません
-- 主語接頭辞・否定の lo・疑問の em/nge という3つの型は文法記述として
-  確かなものなので、**フレーズの丸暗記より型を軸にしたほうが崩れません**
+- **会話フレーズは公開資料と照合してあります**(下記)。56フレーズのうち
+  **57件すべてについて、用例または同じ型の用例が確認できました**
+  (`uncertain: true` は現在0件)。
+  ただし**母語話者による確認は取れていません**
+- 主語接頭辞・否定の lo・疑問の em/nge という3つの型は文法記述で裏が取れているので、
+  **フレーズの丸暗記より型を軸にしたほうが崩れません**
+
+### 照合でわかって直したこと
+
+| 直す前 | 直した後 | 根拠 |
+|---|---|---|
+| `Zan ṭha`(おやすみ) | `Muttui le` | 英語 good night からの類推で作った誤り。実際の言い方は Muttui le / Mangṭha |
+| `I hming eng nge?` | `Engnge i hming?` | 用例は eng nge が頭に来る語順 |
+| `Ka unau pahnih ka nei` | `Unaupa pahnih ka nei` | 用例 "Unaupa pahnih ka nei"(I have two brothers)に合わせた |
+| `Zawi zawkin sawi rawh` | `Zawi zawiin thu sawi rawh` | zawk ではなく zawi zawiin。thu(話)が入る |
+| `Chutah a awm`(あそこ) | `Hetah a awm`(ここ) | hetah は用例あり、chutah は確認できず |
+| `Ka lu a na`(頭が痛い) | **削除** | 用例が見つからず |
+| `A hla em?`(遠いですか) | `Engtia hla nge?` | 用例 "Engtia hla nge?"(How far is it?) |
+| 「ミゾ語に単独の"はい"はない」という注記 | **誤り。`Aw`(はい)と `Aih`(いいえ)がある** | 用例 "Aw, nei e"(はい、持っています)/ "Aih, English ka thiam lo"(いいえ、英語はできません)。`Aih` をフレーズに追加した |
+| `Khua a vot`(寒い) | `Khua a ṭha lo`(天気が悪い) | vot が確認できず。確認済みの語と否定の型だけで作り直した |
+| `Dam takin` = お元気で | = またね | 用例では "See you" |
+| `Kan inhmu leh ang` | `Kan inhmu dawn nia` | 用例は "Kan inhmu dawn nia"(See you again) |
+| `Naktuk kan inhmu ang` | `Naktuk ah kan inhmu dawn nia` | 用例 "Naktuk ah kan inhmu dawnnia"(See you tomorrow) |
+
+逆に、印を外して確定させたもの: `A to lutuk`(高すぎる)、`Min ngaihdam rawh`(ごめんなさい)、
+`Khawiah nge a awm?`(どこにありますか)、`Khua a lum`(暑い)、`Ruah a sur`(雨が降る)、
+`Dar engzat nge?`(何時)、`damdawi`(薬)、`Engtikah nge?`(いつ)、`Kan inhmu dawn nia`(また会いましょう)。
+新しく足したもの: `Mangṭha`(さようなら)、`Muttui le`(おやすみ)、`Min hrilh rawh`(教えてください)。
+
+### 参照した資料
+
+- [Mizo grammar (Wikipedia)](https://en.wikipedia.org/wiki/Mizo_grammar) — 人称接辞 ka/i/a/kan/in/an、否定の lo、疑問詞
+- [Mizo Structure (CIIL, lisindia)](http://lisindia.ciil.org/Mizo/Mizo_struct.html) — 文構造
+- [Serchhip Chelsea: Learn Basic Mizo Language](http://serchhipchelsea.blogspot.com/2019/09/learn-basic-mizo-languages.html) — 基本会話
+- [Calm-Sojourner: Greetings & interaction in Mizo tawng](https://azassk.blogspot.com/2013/08/greetings-interactions-in-mizo-tawng.html) — あいさつ・やりとり
+- [Calm-Sojourner: health problems and doctor consultation](https://azassk.blogspot.com/2018/09/english-to-mizo-language-translation.html) — 体調・薬
+- [Calm-Sojourner: Days, Weeks, Months & Year](https://azassk.blogspot.com/2014/11/english-mizo-days-weeks-months-year.html) — 時の語
+- [Learn Entry: Family relationship names in Mizo](https://www.learnentry.com/english-mizo/vocabulary/relationship-in-mizo/) — 家族の語
+- [Chhangte, The Grammar of Simple Clauses in Mizo (ANU)](https://openresearch-repository.anu.edu.au/server/api/core/bitstreams/ad4a4545-9a90-4681-ba5a-de39615cf505/content) — 指示詞・節構造
+- [Daily Bread Mizo: Khawiah nge i awm?](https://dailybreadmizo.com/2019/05/15/khawiah-nge-i-awm/) — khawiah nge + awm の用例
+- [Mizo - Travel Phrases](https://www.travelphrases.info/languages/mizo.htm) — 距離・移動の言い方
 
 ## 開発
 

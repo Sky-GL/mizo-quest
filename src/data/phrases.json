@@ -3,53 +3,55 @@
 {"id": "ka_dam_e", "mizo": "Ka dam e.", "kana": "カ ダム エ", "ja": "元気だよ。", "literal": "私は・健康だ・よ", "note": "ka=私。文末の e は「〜だよ」と言い切る印。", "scene": "greet", "level": 1}
 {"id": "nangmah", "mizo": "Nangmah?", "kana": "ナンマ", "ja": "あなたは?", "literal": "あなたは?", "note": "聞き返すときの一言。nang=あなた の強調形。", "scene": "greet", "level": 1}
 {"id": "ka_lawm_e", "mizo": "Ka lawm e.", "kana": "カ ロム エ", "ja": "ありがとう。", "literal": "私は・うれしい・よ", "note": "★AWが入る最重要フレーズ。lawm=うれしい。「私はうれしい」でお礼になる。ロムの「ロ」は口を丸めた /ɔ/。", "scene": "greet", "level": 1}
-{"id": "kan_inhmu", "mizo": "Kan inhmu leh ang.", "kana": "カン インフム レ アン", "ja": "また会いましょう。", "literal": "私たちは・会う・また・しよう", "note": "別れぎわに。kan=私たち。leh=また。ang=〜しよう。", "scene": "greet", "level": 2, "uncertain": true}
-{"id": "i_hming", "mizo": "I hming eng nge?", "kana": "イ フミン エン ンゲ", "ja": "お名前は?", "literal": "あなたの・名前・何・か", "note": "hming=名前。eng=何。nge は「何/どこ/誰」とセットで使う疑問の印。", "scene": "name", "level": 1}
+{"id": "kan_inhmu", "mizo": "Kan inhmu dawn nia.", "kana": "カン インフム ドン ニア", "ja": "また会いましょう。", "literal": "私たちは・会う・つもり・だね", "note": "別れぎわの定番。kan=私たち、inhmu=会う、dawn=これから〜する。★AW。", "scene": "greet", "level": 2}
+{"id": "i_hming", "mizo": "Engnge i hming?", "kana": "エンゲ イ フミン", "ja": "お名前は?", "literal": "何・か・あなたの・名前", "note": "語順は「何 か あなたの名前」。eng(何)+ nge が頭に来る形で使われる。", "scene": "name", "level": 1}
 {"id": "ka_hming", "mizo": "Ka hming chu Sugai a ni.", "kana": "カ フミン チュ スガイ ア ニ", "ja": "私の名前はスガイです。", "literal": "私の・名前・は・スガイ・である", "note": "chu=〜は。a ni=〜である。名前の部分を自分のものに差し替えて使う。", "scene": "name", "level": 1}
-{"id": "japan_mi", "mizo": "Japan mi ka ni.", "kana": "ジャパン ミ カ ニ", "ja": "私は日本人です。", "literal": "日本・人・私は・である", "note": "mi=人。「日本人 私は である」の語順になるのがミゾ語らしいところ。", "scene": "name", "level": 2, "uncertain": true}
-{"id": "a_ni", "mizo": "A ni.", "kana": "ア ニ", "ja": "はい / そうです。", "literal": "それは・である", "note": "ミゾ語には単独の「はい」がない。A ni(そうです)で受ける。", "scene": "name", "level": 1}
-{"id": "a_ni_lo", "mizo": "A ni lo.", "kana": "ア ニ ロ", "ja": "いいえ / ちがいます。", "literal": "それは・である・ない", "note": "★否定の lo は動詞の後ろ。この位置さえ覚えれば否定文が全部作れる。", "scene": "name", "level": 1}
+{"id": "japan_mi", "mizo": "Japan mi ka ni.", "kana": "ジャパン ミ カ ニ", "ja": "私は日本人です。", "literal": "日本・人・私は・である", "note": "mi=人。「zirlai ka ni(学生です)」と同じ [名詞] + ka ni の形。「日本 人 私は である」の語順になる。", "scene": "name", "level": 2}
+{"id": "a_ni", "mizo": "A ni.", "kana": "ア ニ", "ja": "はい / そうです。", "literal": "それは・である", "note": "そうです、と内容を受けるときの言い方。単なる相づちの「うん」は Aw。", "scene": "name", "level": 1}
+{"id": "a_ni_lo", "mizo": "A ni lo.", "kana": "ア ニ ロ", "ja": "いいえ / ちがいます。", "literal": "それは・である・ない", "note": "★否定の lo は動詞の後ろ。この位置さえ覚えれば否定文が全部作れる。きっぱり「いいえ」は Aih。", "scene": "name", "level": 1}
+{"id": "aih", "mizo": "Aih.", "kana": "アイ", "ja": "いいえ。", "literal": "いいえ", "note": "きっぱり断るとき。Aw(はい)と対で覚える。A ni lo(そうではない)より短く強い。", "scene": "name", "level": 1}
 {"id": "a_tha_e", "mizo": "A ṭha e.", "kana": "ア タ エ", "ja": "いいですね。/ 大丈夫。", "literal": "それは・よい・よ", "note": "★Ṭ。舌を反らせたT。ṭha=よい。お礼への返事、相づち、承諾に広く使える。", "scene": "thanks", "level": 1}
 {"id": "khawngaihin", "mizo": "Khawngaihin.", "kana": "コンガイヒン", "ja": "お願いします。/ すみません。", "literal": "どうか", "note": "★AWとNGが両方入る。頼みごとの前に添える。", "scene": "thanks", "level": 2}
 {"id": "min_pui_rawh", "mizo": "Min pui rawh.", "kana": "ミン プイ ロ", "ja": "助けてください。", "literal": "私を・助ける・ください", "note": "min=私を(目的語の私)。ka=私は との違いに注意。rawh=〜してください。", "scene": "thanks", "level": 2}
-{"id": "min_ngaihdam", "mizo": "Min ngaihdam rawh.", "kana": "ミン ンガイダム ロ", "ja": "ごめんなさい。", "literal": "私を・許す・ください", "note": "★NGが語頭に立つ。日本語の「ン」から言い始める感覚。", "scene": "thanks", "level": 2, "uncertain": true}
+{"id": "min_ngaihdam", "mizo": "Min ngaihdam rawh.", "kana": "ミン ンガイダム ロ", "ja": "ごめんなさい。", "literal": "私を・許す・ください", "note": "★NGが語頭に立つ。min=私を。ngaihdam=許す。ngaidam と書かれることも多い。", "scene": "thanks", "level": 2}
 {"id": "chaw_i_ei", "mizo": "Chaw i ei em?", "kana": "チョ イ エイ エム", "ja": "ごはん食べる?", "literal": "ごはん・あなたは・食べる・か", "note": "chaw=ごはん/食事。★AW。目的語が先に出て、主語+動詞が後ろに来る。", "scene": "food", "level": 2}
-{"id": "aw_ka_ei", "mizo": "Aw, ka ei dawn.", "kana": "オ カ エイ ドン", "ja": "うん、食べます。", "literal": "うん・私は・食べる・つもり", "note": "Aw だけで「うん」。dawn=これから〜する。★AWが2回。", "scene": "food", "level": 2}
+{"id": "aw_ka_ei", "mizo": "Aw, ka ei dawn.", "kana": "オ カ エイ ドン", "ja": "うん、食べます。", "literal": "うん・私は・食べる・つもり", "note": "Aw だけで「うん」。dawn=これから〜する。「Aw, nei e(うん、持ってるよ)」のように広く使う。★AWが2回。", "scene": "food", "level": 2}
 {"id": "a_tui_e", "mizo": "A tui e!", "kana": "ア トゥイ エ", "ja": "おいしい!", "literal": "それは・おいしい・よ", "note": "tui は「水」でもあり「おいしい」でもある。文脈で分かれる。", "scene": "food", "level": 1}
 {"id": "tui_ka_duh", "mizo": "Tui ka duh.", "kana": "トゥイ カ ドゥ", "ja": "水がほしい。", "literal": "水・私は・ほしい", "note": "duh=ほしい/好き。うしろに lo を足せば「いらない」になる。", "scene": "food", "level": 1}
 {"id": "ka_duh_lo", "mizo": "Ka duh lo.", "kana": "カ ドゥ ロ", "ja": "いりません。", "literal": "私は・ほしい・ない", "note": "断るとき。lo を付けるだけで否定になる。", "scene": "food", "level": 1}
 {"id": "engzat_nge", "mizo": "Hei hi engzat nge?", "kana": "ヘイ ヒ エンザット ンゲ", "ja": "これはいくらですか?", "literal": "これ・は・いくら・か", "note": "hei hi=これ。engzat=いくら。中身を聞く質問なので nge を使う。", "scene": "shop", "level": 2}
 {"id": "sawm_a_ni", "mizo": "Sawm a ni.", "kana": "ソム ア ニ", "ja": "10です。", "literal": "10・それは・である", "note": "数は pakhat(1) pahnih(2) pathum(3) … sawm(10)。単語モードで練習したもの。★AW。", "scene": "shop", "level": 2}
-{"id": "a_to_lutuk", "mizo": "A to lutuk e.", "kana": "ア ト ルトゥック エ", "ja": "高すぎます。", "literal": "それは・高い・すぎる・よ", "note": "to=(値段が)高い。lutuk=〜すぎる。市場での決まり文句。", "scene": "shop", "level": 3, "uncertain": true}
-{"id": "ka_lei_ang", "mizo": "Ka lei ang.", "kana": "カ レイ アン", "ja": "買います。", "literal": "私は・買う・だろう", "note": "lei=買う。ang=〜しよう/だろう。kan inhmu leh ang と同じ ang。", "scene": "shop", "level": 2}
+{"id": "a_to_lutuk", "mizo": "A to lutuk e.", "kana": "ア ト ルトゥック エ", "ja": "高すぎます。", "literal": "それは・高い・すぎる・よ", "note": "to=(値段が)高い。lutuk=〜すぎる。「A hla lutuk lo(遠すぎない)」のように否定にも付く。", "scene": "shop", "level": 3}
+{"id": "ka_lei_ang", "mizo": "Ka lei ang.", "kana": "カ レイ アン", "ja": "買います。", "literal": "私は・買う・だろう", "note": "lei=買う。ang=〜しよう/〜だろう。Ka kal ang(行きます)と同じ ang。", "scene": "shop", "level": 2}
 {"id": "ka_hre_lo", "mizo": "Ka hre lo.", "kana": "カ フレ ロ", "ja": "わかりません。", "literal": "私は・知る・ない", "note": "知る=hria だが、lo が付くと hre に変わる。ミゾ語によくある形の変化。", "scene": "trouble", "level": 1}
-{"id": "mizo_tawng", "mizo": "Mizo ṭawng ka thiam lo.", "kana": "ミゾ トン カ ティアム ロ", "ja": "ミゾ語は話せません。", "literal": "ミゾ・語・私は・できる・ない", "note": "★Ṭ と AW が同時に来る ṭawng(言語)。この語が言えたら発音の山は越えている。", "scene": "trouble", "level": 2}
-{"id": "zawi_zawkin", "mizo": "Zawi zawkin sawi rawh.", "kana": "ゾイ ゾキン ソイ ロ", "ja": "ゆっくり話してください。", "literal": "ゆっくり・もっと・話す・ください", "note": "zawk=もっと〜。sawi=話す。★AWが3回出るので、AWの練習にちょうどいい。", "scene": "trouble", "level": 3, "uncertain": true}
+{"id": "mizo_tawng", "mizo": "Mizo ṭawng ka thiam lo.", "kana": "ミゾ トン カ ティアム ロ", "ja": "ミゾ語は話せません。", "literal": "ミゾ・語・私は・できる・ない", "note": "★Ṭ と AW が同時に来る ṭawng(言語)。「Aih, English ka thiam lo(いいえ、英語はできません)」と同じ形。", "scene": "trouble", "level": 2}
+{"id": "zawi_zawkin", "mizo": "Zawi zawiin thu sawi rawh.", "kana": "ゾイ ゾイン トゥ ソイ ロ", "ja": "ゆっくり話してください。", "literal": "ゆっくり・に・話・言う・ください", "note": "zawi zawiin=ゆっくりと。thu=話。sawi=言う。rawh=〜してください。★AWが3回出るのでAWの練習に向く。", "scene": "trouble", "level": 3}
 {"id": "english_thiam", "mizo": "English i thiam em?", "kana": "イングリッシュ イ ティアム エム", "ja": "英語できますか?", "literal": "英語・あなたは・できる・か", "note": "通じないときの保険。ミゾラムでは英語が広く通じる。", "scene": "trouble", "level": 2}
-{"id": "khawiah_nge", "mizo": "Khawiah nge?", "kana": "コイア ンゲ", "ja": "どこですか?", "literal": "どこ・に・か", "note": "khawi=どこ。-ah=〜に。場所を聞く型はこれ一つ覚えれば足りる。★AW。", "scene": "road", "level": 2}
-{"id": "bazar_khawi", "mizo": "Bazar khawiah nge?", "kana": "バザール コイア ンゲ", "ja": "市場はどこですか?", "literal": "市場・どこ・に・か", "note": "聞きたい場所を頭に置くだけ。bazar はインド各地で通じる借用語。", "scene": "road", "level": 2}
-{"id": "chutah_awm", "mizo": "Chutah a awm.", "kana": "チュタ ア オム", "ja": "あそこにあります。", "literal": "あそこ・それは・ある", "note": "awm=ある/いる。hetah(ここ)と chutah(あそこ)を入れ替えて使う。★AW。", "scene": "road", "level": 2, "uncertain": true}
-{"id": "a_hla_em", "mizo": "A hla em?", "kana": "ア フラ エム", "ja": "遠いですか?", "literal": "それは・遠い・か", "note": "hla=遠い。文末の em はここでも「〜か?」。", "scene": "road", "level": 2, "uncertain": true}
-{"id": "a_hla_lo", "mizo": "A hla lo.", "kana": "ア フラ ロ", "ja": "遠くありません。", "literal": "それは・遠い・ない", "note": "否定の lo。A ni lo / Ka duh lo とまったく同じ作り。", "scene": "road", "level": 2, "uncertain": true}
-{"id": "ka_kal_ang", "mizo": "Ka kal ang.", "kana": "カ カル アン", "ja": "行きます。", "literal": "私は・行く・だろう", "note": "kal=行く。Ka lei ang(買います)と同じ ang。", "scene": "road", "level": 1}
+{"id": "min_hrilh", "mizo": "Min hrilh rawh.", "kana": "ミン フリル ロ", "ja": "教えてください。", "literal": "私に・告げる・ください", "note": "min=私に。Min pui rawh(助けて)と同じ min- の形。困ったときの言い換えに。", "scene": "trouble", "level": 2}
+{"id": "khawiah_nge", "mizo": "Khawiah nge a awm?", "kana": "コイア ンゲ ア オム", "ja": "どこにありますか?", "literal": "どこ・に・か・それは・ある", "note": "khawi=どこ。-ah=〜に。awm=ある/いる。「Khawiah nge i awm?(どこにいますか)」と主語を変えて使える。★AW。", "scene": "road", "level": 2}
+{"id": "bazar_khawi", "mizo": "Bazar khawiah nge a awm?", "kana": "バザール コイア ンゲ ア オム", "ja": "市場はどこですか?", "literal": "市場・どこ・に・か・それは・ある", "note": "聞きたい場所を頭に置くだけ。bazar はインド各地で通じる借用語。", "scene": "road", "level": 2}
+{"id": "hetah_awm", "mizo": "Hetah a awm.", "kana": "ヘタ ア オム", "ja": "ここにあります。", "literal": "ここ・それは・ある", "note": "hetah=ここ。awm=ある/いる。場所を答えるときの基本形。", "scene": "road", "level": 2}
+{"id": "engtia_hla", "mizo": "Engtia hla nge?", "kana": "エンティア フラ ンゲ", "ja": "どのくらい遠いですか?", "literal": "どのくらい・遠い・か", "note": "engtia=どのくらい。hla=遠い。eng(何)の仲間なので nge で締める。Engzat nge?(いくら)と同じ型。", "scene": "road", "level": 2}
+{"id": "a_hla_lo", "mizo": "A hla lo.", "kana": "ア フラ ロ", "ja": "遠くありません。", "literal": "それは・遠い・ない", "note": "否定の lo。Engtia hla nge? への返事。「A hla lutuk lo(遠すぎない)」のようにも言う。", "scene": "road", "level": 2}
+{"id": "ka_kal_ang", "mizo": "Ka kal ang.", "kana": "カ カル アン", "ja": "行きます。", "literal": "私は・行く・だろう", "note": "kal=行く。ang=〜しよう/〜だろう。「Khawiah nge kan inhmuh ang?(どこで会いましょうか)」の ang と同じ。", "scene": "road", "level": 1}
 {"id": "dar_engzat", "mizo": "Dar engzat nge?", "kana": "ダル エンザット ンゲ", "ja": "何時ですか?", "literal": "時・いくつ・か", "note": "dar=時刻。買い物の Engzat nge?(いくら)と同じ engzat を使う。", "scene": "time", "level": 2}
 {"id": "dar_sawm", "mizo": "Dar sawm a ni.", "kana": "ダル ソム ア ニ", "ja": "10時です。", "literal": "時・10・それは・である", "note": "数を入れ替えるだけ。pakhat(1) pahnih(2) pathum(3)…sawm(10)。★AW。", "scene": "time", "level": 2}
 {"id": "vawiin_a_ni", "mizo": "Vawiin a ni.", "kana": "ヴォイン ア ニ", "ja": "今日です。", "literal": "今日・それは・である", "note": "vawiin=今日、naktuk=明日、nimin=昨日。★AW。", "scene": "time", "level": 2}
-{"id": "engtikah", "mizo": "Engtikah nge?", "kana": "エンティカ ンゲ", "ja": "いつですか?", "literal": "いつ・か", "note": "eng(何)の仲間。khawiah(どこ)と同じく -ah が付いて nge で締める。", "scene": "time", "level": 3, "uncertain": true}
-{"id": "naktuk_inhmu", "mizo": "Naktuk kan inhmu ang.", "kana": "ナクトゥック カン インフム アン", "ja": "明日会いましょう。", "literal": "明日・私たちは・会う・しよう", "note": "Kan inhmu leh ang の leh(また)を naktuk(明日)に差し替えた形。", "scene": "time", "level": 2}
+{"id": "engtikah", "mizo": "Engtikah nge?", "kana": "エンティカ ンゲ", "ja": "いつですか?", "literal": "いつ・か", "note": "eng(何)の仲間。Engtik nge と短く言うこともある。khawiah(どこ)と同じく nge で締める。", "scene": "time", "level": 3}
+{"id": "naktuk_inhmu", "mizo": "Naktuk ah kan inhmu dawn nia.", "kana": "ナクトゥック ア カン インフム ドン ニア", "ja": "明日会いましょう。", "literal": "明日・に・私たちは・会う・つもり・だね", "note": "Kan inhmu dawn nia の頭に「明日に」を付けただけ。naktuk=明日、-ah=〜に。", "scene": "time", "level": 2}
 {"id": "unau_nei_em", "mizo": "Unau i nei em?", "kana": "ウナウ イ ネイ エム", "ja": "兄弟はいますか?", "literal": "兄弟・あなたは・持つ・か", "note": "nei=持つ。ミゾ語では家族も「持つ」で言う。unau=きょうだい。", "scene": "family", "level": 2}
-{"id": "unau_pahnih", "mizo": "Ka unau pahnih ka nei.", "kana": "カ ウナウ パフニ カ ネイ", "ja": "兄弟が2人います。", "literal": "私の・兄弟・2人・私は・持つ", "note": "数を入れ替えれば人数が変わる。主語の ka が2回出るのがミゾ語らしい形。", "scene": "family", "level": 3}
+{"id": "unau_pahnih", "mizo": "Unaupa pahnih ka nei.", "kana": "ウナウパ パフニ カ ネイ", "ja": "兄弟が2人います。", "literal": "兄弟(男)・2人・私は・持つ", "note": "unaupa=男のきょうだい、unaunu=女のきょうだい。数を入れ替えれば人数が変わる。", "scene": "family", "level": 3}
 {"id": "naupang_nei", "mizo": "Naupang i nei em?", "kana": "ナウパン イ ネイ エム", "ja": "子どもはいますか?", "literal": "子ども・あなたは・持つ・か", "note": "naupang=子ども。Unau i nei em? と同じ型。", "scene": "family", "level": 2}
 {"id": "ka_nei_lo", "mizo": "Ka nei lo.", "kana": "カ ネイ ロ", "ja": "いません。", "literal": "私は・持つ・ない", "note": "また lo。持っていない=いない。", "scene": "family", "level": 1}
 {"id": "ka_nu_ka_pa", "mizo": "Ka nu leh ka pa.", "kana": "カ ヌ レ カ パ", "ja": "母と父。", "literal": "私の・母・と・私の・父", "note": "nu=母、pa=父。leh=と(Kan inhmu leh ang の leh と同じ語)。", "scene": "family", "level": 1}
 {"id": "i_damlo_em", "mizo": "I damlo em?", "kana": "イ ダムロ エム", "ja": "具合が悪いのですか?", "literal": "あなたは・健康でない・か", "note": "dam(健康)+ lo(ない)がくっついて damlo=病気。否定の型がそのまま単語になっている好例。", "scene": "health", "level": 2}
 {"id": "ka_damlo", "mizo": "Ka damlo.", "kana": "カ ダムロ", "ja": "具合が悪いです。", "literal": "私は・健康でない", "note": "Ka dam e(元気です)のちょうど裏返し。この2つは対で覚える。", "scene": "health", "level": 1}
-{"id": "ka_lu_a_na", "mizo": "Ka lu a na.", "kana": "カ ル ア ナ", "ja": "頭が痛いです。", "literal": "私の・頭・それは・痛い", "note": "lu=頭、na=痛い。痛む部位が主語になるので a(それは)が付く。", "scene": "health", "level": 3, "uncertain": true}
 {"id": "damdawi_duh", "mizo": "Damdawi i duh em?", "kana": "ダムドイ イ ドゥ エム", "ja": "薬はいりますか?", "literal": "薬・あなたは・ほしい・か", "note": "damdawi=薬。dam(健康)から来た語。★AW。", "scene": "health", "level": 2}
 {"id": "khua_a_tha", "mizo": "Vawiin khua a ṭha e.", "kana": "ヴォイン クア ア タ エ", "ja": "今日はいい天気ですね。", "literal": "今日・天気・それは・よい・ね", "note": "khua=天気/その場の様子。A ṭha e をそのまま天気に使い回している。★Ṭ。", "scene": "weather", "level": 2}
-{"id": "khua_a_lum", "mizo": "Khua a lum.", "kana": "クア ア ルム", "ja": "暑いです。", "literal": "天気・それは・暑い", "note": "lum=暑い/温かい。主語は khua(天気)。", "scene": "weather", "level": 2, "uncertain": true}
-{"id": "khua_a_vot", "mizo": "Khua a vot.", "kana": "クア ア ヴォット", "ja": "寒いです。", "literal": "天気・それは・寒い", "note": "vot=寒い。語末の -t は開放せず止める(Step5の音)。", "scene": "weather", "level": 2, "uncertain": true}
-{"id": "ruah_a_sur", "mizo": "Ruah a sur.", "kana": "ルア ア スル", "ja": "雨が降っています。", "literal": "雨・それは・降る", "note": "ruah=雨、sur=降る。ミゾラムは雨が多いので出番が多い。", "scene": "weather", "level": 2, "uncertain": true}
+{"id": "khua_a_lum", "mizo": "Khua a lum.", "kana": "クア ア ルム", "ja": "暑いです。", "literal": "天気・それは・暑い", "note": "lum=暑い/温かい。主語は khua(天気)。", "scene": "weather", "level": 2}
+{"id": "khua_tha_lo", "mizo": "Khua a ṭha lo.", "kana": "クア ア タ ロ", "ja": "天気が悪いです。", "literal": "天気・それは・よい・ない", "note": "A ṭha e(よい)に lo を足しただけ。否定の型がそのまま天気に使える。★Ṭ。", "scene": "weather", "level": 2}
+{"id": "ruah_a_sur", "mizo": "Ruah a sur.", "kana": "ルア ア スル", "ja": "雨が降っています。", "literal": "雨・それは・降る", "note": "ruah=雨、sur=降る。ミゾラムは雨が多いので出番が多い。", "scene": "weather", "level": 2}
 {"id": "ka_kal_dawn", "mizo": "Ka kal dawn.", "kana": "カ カル ドン", "ja": "もう行きます。", "literal": "私は・行く・つもり", "note": "dawn=これから〜する。Ka ei dawn(食べます)と同じ。★AW。", "scene": "bye", "level": 2}
-{"id": "dam_takin", "mizo": "Dam takin.", "kana": "ダム タキン", "ja": "お元気で。", "literal": "健康・に", "note": "dam(健康)+ takin(〜に)。去る人を送り出すときの決まり文句。", "scene": "bye", "level": 2, "uncertain": true}
-{"id": "zan_tha", "mizo": "Zan ṭha.", "kana": "ザン タ", "ja": "おやすみなさい。", "literal": "夜・よい", "note": "zan=夜、ṭha=よい。英語の Good night と同じ組み立て。★Ṭ。", "scene": "bye", "level": 2, "uncertain": true}
+{"id": "dam_takin", "mizo": "Dam takin.", "kana": "ダム タキン", "ja": "またね。", "literal": "健康・に", "note": "dam(健康)+ takin(〜に)。「Dam takin le」とも言う。去る人にも残る人にも使える。", "scene": "bye", "level": 2}
+{"id": "mangtha", "mizo": "Mangṭha.", "kana": "マンタ", "ja": "さようなら。", "literal": "さようなら", "note": "★Ṭ。別れの定番。Dam takin(またね)と並べて覚える。", "scene": "bye", "level": 1}
+{"id": "muttui", "mizo": "Muttui le.", "kana": "ムットゥイ レ", "ja": "おやすみなさい。", "literal": "おやすみ・ね", "note": "寝る前のあいさつ。mut=眠る に由来する決まり文句で、語をばらして考えなくてよい。", "scene": "bye", "level": 2}
