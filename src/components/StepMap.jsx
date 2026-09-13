@@ -1,7 +1,8 @@
 import { STEPS, charsOfStep } from '../data/steps'
-import { SCENES } from '../data/talk'
+import { SCENES, ALL_PHRASES } from '../data/talk'
 
 const SCENE_TOTAL = SCENES.length
+const PHRASE_TOTAL = ALL_PHRASES.length
 
 const Stars = ({ n }) => (
   <span className="stars">
@@ -43,7 +44,7 @@ export default function StepMap({ progress, onSelect, onReview, onWords, onMemor
           <span className="mode-emoji">💬</span>
           <strong>会話モード</strong>
           <span className="mode-sub">
-            6場面。聞く→選ぶ→自分で組み立てる。
+            {SCENE_TOTAL}場面{PHRASE_TOTAL}フレーズ。聞く→選ぶ→自分で組み立てる。
             {sceneDone ? ` ${sceneDone}/${SCENE_TOTAL} 場面クリア` : ' まずは「あいさつ」から'}
           </span>
         </button>

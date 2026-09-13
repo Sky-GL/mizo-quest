@@ -77,6 +77,7 @@ export default function App() {
           <TalkMode
             key={view.key}
             phraseStats={progress.phrases}
+            sceneStats={progress.scenes}
             onBack={goMap}
             onAnswer={recordAnswer}
             onPhrase={recordPhrase}

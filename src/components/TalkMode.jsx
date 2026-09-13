@@ -4,7 +4,10 @@ import { speakText } from '../lib/speech'
 import { playCorrect, playWrong, playClear } from '../lib/sfx'
 import { charScore } from '../lib/srs'
 import {
+  ALL_PHRASES,
   SCENES,
+  SCENE_GROUPS,
+  scenesOfGroup,
   phraseById,
   phrasesOfScene,
   lineText,
@@ -25,12 +28,19 @@ const STAGES = [
  * 会話モード。1つのシーンを「聞く→選ぶ→会話する」の3段で回す。
  * 眺めるだけでは定着しないので、最後は必ず自分で文を組み立てさせる。
  */
-export default function TalkMode({ phraseStats, onBack, onAnswer, onPhrase, onSceneDone }) {
+export default function TalkMode({ phraseStats, sceneStats, onBack, onAnswer, onPhrase, onSceneDone }) {
   const [sceneId, setSceneId] = useState(null)
   const scene = useMemo(() => SCENES.find((s) => s.id === sceneId) || null, [sceneId])
 
   if (!scene) {
-    return <SceneList phraseStats={phraseStats} onBack={onBack} onSelect={setSceneId} />
+    return (
+      <SceneList
+        phraseStats={phraseStats}
+        sceneStats={sceneStats}
+        onBack={onBack}
+        onSelect={setSceneId}
+      />
+    )
   }
   return (
     <SceneRunner
@@ -47,7 +57,11 @@ export default function TalkMode({ phraseStats, onBack, onAnswer, onPhrase, onSc
 
 /* ---------------- シーン選択 ---------------- */
 
-function SceneList({ phraseStats, onBack, onSelect }) {
+function SceneList({ phraseStats, sceneStats, onBack, onSelect }) {
+  // 相づち(A ṭha e など)は複数の場面で共有されるので、場面ごとの合計ではなく実数で数える
+  const totalPhrases = ALL_PHRASES.length
+  const doneScenes = SCENES.filter((s) => sceneStats[s.id]?.done).length
+
   return (
     <div className="screen talk" style={{ '--accent': 'var(--c-talk)' }}>
       <div className="screen-head">
@@ -56,31 +70,45 @@ function SceneList({ phraseStats, onBack, onSelect }) {
           <span className="step-emoji">💬</span>
           <div>
             <h2>会話モード</h2>
-            <p>場面ごとに、聞く → 選ぶ → 自分で組み立てる の順で練習します。</p>
+            <p>
+              {SCENES.length}場面・{totalPhrases}フレーズ。聞く → 選ぶ → 自分で組み立てる の順で練習します。
+              {doneScenes > 0 && ` (${doneScenes}/${SCENES.length} 場面クリア)`}
+            </p>
           </div>
         </div>
       </div>
 
-      <div className="talk-scenes">
-        {SCENES.map((s) => {
-          const phrases = phrasesOfScene(s)
-          const known = phrases.filter((p) => (phraseStats[p.id]?.correct || 0) > 0).length
-          return (
-            <button key={s.id} className="scene-card" onClick={() => onSelect(s.id)}>
-              <div className="scene-top">
-                <span className="scene-emoji">{s.emoji}</span>
-                <strong>{s.title}</strong>
-              </div>
-              <p className="scene-sit">{s.situation}</p>
-              <p className="scene-goal">{s.goal}</p>
-              <div className="scene-bar">
-                <div className="scene-fill" style={{ width: `${(known / phrases.length) * 100}%` }} />
-              </div>
-              <span className="scene-count">{known}/{phrases.length} フレーズ</span>
-            </button>
-          )
-        })}
-      </div>
+      {SCENE_GROUPS.map((g) => (
+        <section key={g.key} className="scene-group">
+          <h3 className="group-head">
+            <span>{g.emoji}</span>
+            {g.title}
+            <small>{g.note}</small>
+          </h3>
+          <div className="talk-scenes">
+            {scenesOfGroup(g.key).map((s) => {
+              const phrases = phrasesOfScene(s)
+              const known = phrases.filter((p) => (phraseStats[p.id]?.correct || 0) > 0).length
+              const done = sceneStats[s.id]?.done
+              return (
+                <button key={s.id} className={`scene-card ${done ? 'done' : ''}`} onClick={() => onSelect(s.id)}>
+                  <div className="scene-top">
+                    <span className="scene-emoji">{s.emoji}</span>
+                    <strong>{s.title}</strong>
+                    {done && <span className="scene-check">✓</span>}
+                  </div>
+                  <p className="scene-sit">{s.situation}</p>
+                  <p className="scene-goal">{s.goal}</p>
+                  <div className="scene-bar">
+                    <div className="scene-fill" style={{ width: `${(known / phrases.length) * 100}%` }} />
+                  </div>
+                  <span className="scene-count">{known}/{phrases.length} フレーズ</span>
+                </button>
+              )
+            })}
+          </div>
+        </section>
+      ))}
 
       <p className="talk-note">
         ミゾラムでは英語も広く通じますが、<strong>Chibai</strong> と <strong>Ka lawm e</strong> の
@@ -88,9 +116,8 @@ function SceneList({ phraseStats, onBack, onSelect }) {
       </p>
       <p className="talk-note warn">
         ⚠️ 収録したフレーズは<strong>話者による検証を受けていません</strong>。
-        あいさつなど基本の言い回しは確度が高いものの、細かい言い方は現地の人の言い方に
-        合わせてください。文法の型(主語・否定・質問)のほうは確かなので、
-        そちらを軸にすると崩れにくいです。
+        確度が下がるものには<strong>「要確認」</strong>の印を付けてあります(各場面の「聞く」で確認できます)。
+        文法の型(主語・否定・質問)のほうは記述として確かなので、そちらを軸にすると崩れにくいです。
       </p>
     </div>
   )
@@ -208,6 +235,7 @@ function ReadStage({ scene, phrases, onNext }) {
                 <div className="ph-kana">{p.kana}</div>
               </div>
               <div className="ph-right">
+                {p.uncertain && <span className="ph-flag" title="話者による確認が取れていない言い回し">要確認</span>}
                 <span className="ph-ja">{p.ja}</span>
                 <span className="ph-caret">{open === p.id ? '−' : '+'}</span>
               </div>
@@ -216,6 +244,11 @@ function ReadStage({ scene, phrases, onNext }) {
               <div className="phrase-body">
                 <p className="ph-literal">直訳: {p.literal}</p>
                 <p className="ph-note">{p.note}</p>
+                {p.uncertain && (
+                  <p className="ph-warn">
+                    ⚠️ この言い回しは話者の確認が取れていません。通じなければ現地の言い方に合わせてください。
+                  </p>
+                )}
                 <SpeakButton text={p.mizo} size="sm" />
               </div>
             )}

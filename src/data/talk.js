@@ -16,24 +16,33 @@ export const SCENES = parseLines(rawScenes)
 export const PATTERNS = parseLines(rawPatterns)
 
 export const phraseById = (id) => ALL_PHRASES.find((p) => p.id === id)
+
+/** 場面のまとまり。いきなり12個並べると選べないので3段に分ける */
+export const SCENE_GROUPS = [
+  { key: 'basic', title: 'まずこれだけ', emoji: '🌱', note: 'この4場面が言えれば、あいさつして名乗って助けを求められる' },
+  { key: 'town', title: '街で使う', emoji: '🏘️', note: '食べる・買う・たずねる・約束する' },
+  { key: 'talk', title: '人と話す', emoji: '💬', note: '世間話をして、気持ちよく別れる' },
+]
+
+export const scenesOfGroup = (key) => SCENES.filter((s) => s.group === key)
 export const sceneById = (id) => SCENES.find((s) => s.id === id)
 
 /**
- * そのシーンの会話に実際に出てくるフレーズ(重複なし・登場順)。
- * フレーズ側の scene は「どの場面で初めて習うか」なので、
- * 他のシーンから借りてくる相づち(A ṭha e など)はこちらで拾う。
+ * その場面で練習するフレーズ(重複なし)。
+ * まず会話に出てくる順、そのあとに「この場面で習うが今回の会話には出ていない」ものを足す。
+ * 会話に入れると不自然になる言い換え(A ni lo / Ka duh lo など)も
+ * 場面の一部として練習させたいので、両方から拾う。
  */
 export const phrasesOfScene = (scene) => {
   const seen = new Set()
   const out = []
-  scene.lines.forEach((line) =>
-    line.ids.forEach((id) => {
-      if (seen.has(id)) return
-      seen.add(id)
-      const p = phraseById(id)
-      if (p) out.push(p)
-    })
-  )
+  const add = (p) => {
+    if (!p || seen.has(p.id)) return
+    seen.add(p.id)
+    out.push(p)
+  }
+  scene.lines.forEach((line) => line.ids.forEach((id) => add(phraseById(id))))
+  ALL_PHRASES.filter((p) => p.scene === scene.id).forEach(add)
   return out
 }
 
