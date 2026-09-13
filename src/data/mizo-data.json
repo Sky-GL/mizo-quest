@@ -1,0 +1,50 @@
+{"id": "a", "letter": "A", "ipa": "/a/", "kana": "ア", "group": "vowel", "step": 1, "freq": "core", "speak": "a", "note": "日本語の「ア」とほぼ同じ。アルファベットの1番目。", "audioUrl": "/audio/a.mp3"}
+{"id": "aw", "letter": "AW", "ipa": "/ɔ/", "kana": "オ(口を丸く)", "group": "vowel", "step": 1, "freq": "core", "speak": "aw", "note": "★最大の関門。2文字だがこれで1文字。英語のlawのオー。アルファベットの2番目に来る。", "audioUrl": "/audio/aw.mp3"}
+{"id": "e", "letter": "E", "ipa": "/e/", "kana": "エ", "group": "vowel", "step": 1, "freq": "core", "speak": "e", "note": "日本語の「エ」。", "audioUrl": "/audio/e.mp3"}
+{"id": "i", "letter": "I", "ipa": "/i/", "kana": "イ", "group": "vowel", "step": 1, "freq": "core", "speak": "i", "note": "日本語の「イ」。", "audioUrl": "/audio/i.mp3"}
+{"id": "o", "letter": "O", "ipa": "/o/", "kana": "オ(口をすぼめる)", "group": "vowel", "step": 1, "freq": "core", "speak": "o", "note": "AWより口をすぼめた「オ」。この2つの区別が最初の山。", "audioUrl": "/audio/o.mp3"}
+{"id": "u", "letter": "U", "ipa": "/u/", "kana": "ウ", "group": "vowel", "step": 1, "freq": "core", "speak": "u", "note": "日本語の「ウ」より唇を丸める。", "audioUrl": "/audio/u.mp3"}
+
+{"id": "b", "letter": "B", "ipa": "/b/", "kana": "バ行", "group": "easy", "step": 2, "freq": "core", "speak": "ba", "note": "日本語のバ行と同じ。", "audioUrl": "/audio/b.mp3"}
+{"id": "d", "letter": "D", "ipa": "/d/", "kana": "ダ行", "group": "easy", "step": 2, "freq": "core", "speak": "da", "note": "日本語のダ行と同じ。", "audioUrl": "/audio/d.mp3"}
+{"id": "h", "letter": "H", "ipa": "/h/", "kana": "ハ行", "group": "easy", "step": 2, "freq": "core", "speak": "ha", "note": "日本語のハ行。語末に来ると声調を決める役割も持つ。", "audioUrl": "/audio/h.mp3"}
+{"id": "k", "letter": "K", "ipa": "/k/", "kana": "カ行", "group": "easy", "step": 2, "freq": "core", "speak": "ka", "note": "日本語のカ行。ka は「私の」という頻出語でもある。", "audioUrl": "/audio/k.mp3"}
+{"id": "l", "letter": "L", "ipa": "/l/", "kana": "ラ行(舌先)", "group": "easy", "step": 2, "freq": "core", "speak": "la", "note": "舌先を上の歯ぐきに付ける英語のL。Rとの区別が必要。", "audioUrl": "/audio/l.mp3"}
+{"id": "m", "letter": "M", "ipa": "/m/", "kana": "マ行", "group": "easy", "step": 2, "freq": "core", "speak": "ma", "note": "日本語のマ行と同じ。", "audioUrl": "/audio/m.mp3"}
+{"id": "n", "letter": "N", "ipa": "/n/", "kana": "ナ行", "group": "easy", "step": 2, "freq": "core", "speak": "na", "note": "日本語のナ行と同じ。", "audioUrl": "/audio/n.mp3"}
+{"id": "p", "letter": "P", "ipa": "/p/", "kana": "パ行", "group": "easy", "step": 2, "freq": "core", "speak": "pa", "note": "日本語のパ行。pa- は数詞の頭によく付く(pakhat=1)。", "audioUrl": "/audio/p.mp3"}
+{"id": "s", "letter": "S", "ipa": "/s/", "kana": "サ行", "group": "easy", "step": 2, "freq": "core", "speak": "sa", "note": "日本語のサ行。", "audioUrl": "/audio/s.mp3"}
+{"id": "t", "letter": "T", "ipa": "/t/", "kana": "タ行", "group": "easy", "step": 2, "freq": "core", "speak": "ta", "note": "舌先を歯の裏に付ける普通のT。Step6で Ṭ と区別する。", "audioUrl": "/audio/t.mp3"}
+
+{"id": "f", "letter": "F", "ipa": "/f/", "kana": "ファ行", "group": "nonjp", "step": 3, "freq": "core", "speak": "fa", "note": "下唇を上の歯に当てる。日本語のフとは違う。", "audioUrl": "/audio/f.mp3"}
+{"id": "v", "letter": "V", "ipa": "/v/", "kana": "ヴァ行", "group": "nonjp", "step": 3, "freq": "core", "speak": "va", "note": "Fの有声版。日本語にない音。", "audioUrl": "/audio/v.mp3"}
+{"id": "z", "letter": "Z", "ipa": "/z/", "kana": "ザ行", "group": "nonjp", "step": 3, "freq": "core", "speak": "za", "note": "Sの有声版。日本語のザは語頭でdzになりがちなので注意。", "audioUrl": "/audio/z.mp3"}
+{"id": "r", "letter": "R", "ipa": "/r/", "kana": "ラ行(震え)", "group": "nonjp", "step": 3, "freq": "core", "speak": "ra", "note": "舌先を震わせる/はじく音。Lと混同しやすい最重要ペア。", "audioUrl": "/audio/r.mp3"}
+{"id": "g", "letter": "G", "ipa": "/ɡ/", "kana": "ガ行", "group": "nonjp", "step": 3, "freq": "common", "speak": "ga", "note": "常に硬いG(ギではなくグ)。単独で使われることは比較的少ない。", "audioUrl": "/audio/g.mp3"}
+{"id": "j", "letter": "J", "ipa": "/dʒ/", "kana": "ジャ行", "group": "nonjp", "step": 3, "freq": "common", "speak": "ja", "note": "英語のjump のJ。CHの有声版にあたる。", "audioUrl": "/audio/j.mp3"}
+
+{"id": "ch", "letter": "CH", "ipa": "/tʃ/", "kana": "チャ行", "group": "digraph", "step": 4, "freq": "core", "speak": "cha", "note": "2文字で1文字。Cは単独では使われず、必ずCHの形で出る。", "audioUrl": "/audio/ch.mp3"}
+{"id": "ng", "letter": "NG", "ipa": "/ŋ/", "kana": "ング", "group": "digraph", "step": 4, "freq": "core", "speak": "nga", "note": "★2文字で1文字。日本語と違い語頭に立てる(ngai=想う)。「ンガ」ではなく鼻に抜けた一息で。", "audioUrl": "/audio/ng.mp3"}
+{"id": "tt", "letter": "Ṭ", "ipa": "/ʈ/", "kana": "タ(そり舌)", "group": "retroflex", "step": 4, "freq": "core", "speak": "ta", "note": "★最難関。舌を上に反らせて出すT。点が下に付く。Ṭawng(言語)のように頻出語に出る。", "audioUrl": "/audio/tt.mp3"}
+
+{"id": "fin_p", "letter": "-p", "ipa": "/p̚/", "kana": "ッ(プの形)", "group": "final", "step": 5, "freq": "core", "speak": "ap", "note": "語末のP。唇を閉じて止めるだけで、プと開放しない。", "audioUrl": "/audio/fin_p.mp3"}
+{"id": "fin_t", "letter": "-t", "ipa": "/t̚/", "kana": "ッ(トの形)", "group": "final", "step": 5, "freq": "core", "speak": "at", "note": "語末のT。舌を付けて止める。pakhat(1)の -t。", "audioUrl": "/audio/fin_t.mp3"}
+{"id": "fin_k", "letter": "-k", "ipa": "/k̚/", "kana": "ッ(クの形)", "group": "final", "step": 5, "freq": "core", "speak": "ak", "note": "語末のK。喉で止める。paruk(6)の -k。", "audioUrl": "/audio/fin_k.mp3"}
+{"id": "fin_ng", "letter": "-ng", "ipa": "/ŋ/", "kana": "ン(鼻)", "group": "final", "step": 5, "freq": "core", "speak": "ang", "note": "語末のNG。日本語の「ン」に近い。ṭawng(言語)の -ng。", "audioUrl": "/audio/fin_ng.mp3"}
+{"id": "fin_h", "letter": "-h", "ipa": "/ʔ/", "kana": "ッ(息)", "group": "final", "step": 5, "freq": "core", "speak": "ah", "note": "語末のH。息を止める。声調の下降とセットで現れることが多い。", "audioUrl": "/audio/fin_h.mp3"}
+{"id": "fin_m", "letter": "-m", "ipa": "/m/", "kana": "ム/ン", "group": "final", "step": 5, "freq": "common", "speak": "am", "note": "語末のM。唇を閉じたまま終わる。dam(元気)の -m。", "audioUrl": "/audio/fin_m.mp3"}
+{"id": "fin_n", "letter": "-n", "ipa": "/n/", "kana": "ン", "group": "final", "step": 5, "freq": "common", "speak": "an", "note": "語末のN。-m / -ng との区別は舌と唇の位置。", "audioUrl": "/audio/fin_n.mp3"}
+{"id": "fin_l", "letter": "-l", "ipa": "/l/", "kana": "ル", "group": "final", "step": 5, "freq": "common", "speak": "al", "note": "語末のL。舌先を付けたまま終わる。", "audioUrl": "/audio/fin_l.mp3"}
+{"id": "fin_r", "letter": "-r", "ipa": "/r/", "kana": "ル(震え)", "group": "final", "step": 5, "freq": "common", "speak": "ar", "note": "語末のR。sarih(7)などに現れる。", "audioUrl": "/audio/fin_r.mp3"}
+
+{"id": "len_short", "letter": "a", "ipa": "[a]", "kana": "短い ア", "group": "length", "step": 6, "freq": "core", "speak": "a", "note": "短い母音。ぱっと切る。", "audioUrl": "/audio/len_short.mp3"}
+{"id": "len_long", "letter": "ā", "ipa": "[aː]", "kana": "長い アー", "group": "length", "step": 6, "freq": "core", "speak": "aa", "note": "長い母音。ミゾ語の綴りでは伝統的に山記号(â)で長さを示すが、このアプリでは下降声調の â と混同しないよう、長さは横線(ā)で表す。", "audioUrl": "/audio/len_long.mp3"}
+{"id": "t_high", "letter": "á", "ipa": "[á] 高", "kana": "高い", "group": "tone", "step": 6, "freq": "core", "speak": "a", "note": "高いところで平らに保つ。長母音の4声調のうちの1つ。", "audioUrl": "/audio/t_high.mp3"}
+{"id": "t_low", "letter": "à", "ipa": "[à] 低", "kana": "低い", "group": "tone", "step": 6, "freq": "core", "speak": "a", "note": "低いところで平らに保つ。", "audioUrl": "/audio/t_low.mp3"}
+{"id": "t_rise", "letter": "ǎ", "ipa": "[ǎ] 上昇", "kana": "上げる", "group": "tone", "step": 6, "freq": "core", "speak": "a", "note": "低→高。日本語の疑問の語尾に似た上がり方。", "audioUrl": "/audio/t_rise.mp3"}
+{"id": "t_fall", "letter": "â", "ipa": "[â] 下降", "kana": "下げる", "group": "tone", "step": 6, "freq": "core", "speak": "a", "note": "高→低。語末の h や声門閉鎖と結びついて現れやすい。記号の山(^)はここでは下降を表す。", "audioUrl": "/audio/t_fall.mp3"}
+
+{"id": "s_high", "letter": "a̋", "ipa": "[a̋] 短高", "kana": "短く高い", "group": "tone_short", "step": 7, "freq": "common", "speak": "a", "note": "短母音側の4声調の1つ。長母音版より切れが鋭い。", "audioUrl": "/audio/s_high.mp3"}
+{"id": "s_low", "letter": "ȁ", "ipa": "[ȁ] 短低", "kana": "短く低い", "group": "tone_short", "step": 7, "freq": "common", "speak": "a", "note": "短く低く。", "audioUrl": "/audio/s_low.mp3"}
+{"id": "s_rise", "letter": "ă", "ipa": "[ă] 短昇", "kana": "短く上げる", "group": "tone_short", "step": 7, "freq": "common", "speak": "a", "note": "短い中で上げきる。長母音の上昇より難しい。", "audioUrl": "/audio/s_rise.mp3"}
+{"id": "s_fall", "letter": "à̆", "ipa": "[ằ] 短降", "kana": "短く下げる", "group": "tone_short", "step": 7, "freq": "common", "speak": "a", "note": "短い中で下げきる。", "audioUrl": "/audio/s_fall.mp3"}
