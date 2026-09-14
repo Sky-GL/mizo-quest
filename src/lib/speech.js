@@ -57,6 +57,20 @@ export const stopSpeaking = () => {
 }
 
 /**
+ * 読み上げる中身に合わせた速さを決める。
+ * 1字だけなら舌の形を追えるようゆっくり、文は普通の速さで流す。
+ * 文をゆっくり読ませると単語がぶつ切りに聞こえて、かえって聞き取りにくい。
+ */
+export const RATE = { slow: 0.7, word: 0.9, sentence: 1.0 }
+
+export const naturalRate = (text) => {
+  const t = (text || '').trim()
+  if (/[\s.,!?]/.test(t)) return RATE.sentence // 空白か句読点があれば文として扱う
+  if (t.length <= 3) return RATE.slow           // A / AW / CH のような1字単位
+  return RATE.word
+}
+
+/**
  * onend が来ない環境があるので、保険として打ち切る時間を見積もる。
  * 実際の発話より必ず長くなるよう、多めに取る。
  */
@@ -99,9 +113,10 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
  * 文字を発音する。実録音(mp3)があればそちらを優先する。
  * @returns {Promise<'file'|'tts'|'none'>} 実際に使った手段
  */
-export const speak = async (char, { rate = 0.7 } = {}) => {
+export const speak = async (char, { rate } = {}) => {
   const text = char?.speak || char?.letter
   if (!text) return 'none'
+  const r = rate ?? naturalRate(text)
 
   stopSpeaking()
 
@@ -113,14 +128,14 @@ export const speak = async (char, { rate = 0.7 } = {}) => {
   }
 
   if (!hasVoice()) return 'none'
-  return utter(text, rate)
+  return utter(text, r)
 }
 
 /** 任意の文字列(単語や文)を読み上げる。終わるまで待つ */
-export const speakText = async (text, { rate = 0.7 } = {}) => {
+export const speakText = async (text, { rate } = {}) => {
   if (!text || !hasVoice()) return 'none'
   stopSpeaking()
-  return utter(text, rate)
+  return utter(text, rate ?? naturalRate(text))
 }
 
 /**
@@ -128,12 +143,17 @@ export const speakText = async (text, { rate = 0.7 } = {}) => {
  * 会話を通しで聞いたときに文が途中で切れない。
  * 新しい再生が始まったら途中でも止める。
  *
- * @param {string[]} items 読み上げる文の並び
+ * @param {(string|{text: string, rate?: number})[]} items 読み上げる文の並び。
+ *        1つずつ速さを変えたいときはオブジェクトで渡す
  * @param {{gap?: number, rate?: number, onStep?: (i: number) => void}} opts
  *        gap は文と文のあいだの無音(ms)。onStep には今読んでいる位置が渡る(終了時は -1)。
+ *        rate を省くと中身に合わせて決める(文は普通の速さ、1字はゆっくり)。
  */
-export const speakSequence = async (items, { gap = 500, rate = 0.7, onStep } = {}) => {
-  const list = (items || []).filter(Boolean)
+export const speakSequence = async (items, { gap = 450, rate, onStep } = {}) => {
+  const list = (items || [])
+    .filter(Boolean)
+    .map((it) => (typeof it === 'string' ? { text: it } : it))
+    .filter((it) => it.text)
   if (!list.length || !hasVoice()) {
     onStep?.(-1)
     return 'none'
@@ -145,7 +165,7 @@ export const speakSequence = async (items, { gap = 500, rate = 0.7, onStep } = {
   for (let i = 0; i < list.length; i++) {
     if (!alive()) return 'stopped'
     onStep?.(i)
-    await utter(list[i], rate)
+    await utter(list[i].text, list[i].rate ?? rate ?? naturalRate(list[i].text))
     if (!alive()) return 'stopped'
     if (i < list.length - 1) await sleep(gap)
   }

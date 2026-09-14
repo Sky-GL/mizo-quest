@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import SpeakButton from './SpeakButton'
-import { speakSequence, stopSpeaking } from '../lib/speech'
+import { speakSequence, stopSpeaking, RATE } from '../lib/speech'
 import { playCorrect, playWrong, playClear } from '../lib/sfx'
 import { charScore } from '../lib/srs'
 import {
@@ -198,14 +198,29 @@ function SceneRunner({ scene, phraseStats, onBack, onAnswer, onPhrase, onSceneDo
 function ReadStage({ scene, phrases, onNext }) {
   const [open, setOpen] = useState(null) // 解説を開いているフレーズID
   const [playing, setPlaying] = useState(-1) // 通し再生で今読んでいる行
+  const [slow, setSlow] = useState(false) // ゆっくり読ませるか
 
   // 画面を離れたら読み上げも止める
   useEffect(() => stopSpeaking, [])
 
+  // 文は普通の速さで読む。ゆっくり読ませると単語がぶつ切りに聞こえて流れなくなる。
+  // 聞き取れないときだけ「ゆっくり」に落とせるようにしてある。
+  const rate = slow ? RATE.slow : RATE.sentence
+
   // 会話を頭から通しで読み上げる。
   // 1行を言い終えてから次に移るので、長い行が途中で切れない。
   const playAll = () =>
-    speakSequence(scene.lines.map(lineText), { gap: 600, onStep: setPlaying })
+    speakSequence(scene.lines.map(lineText), {
+      gap: slow ? 700 : 450,
+      rate,
+      onStep: setPlaying,
+    })
+
+  const toggleSlow = () => {
+    stopSpeaking()
+    setPlaying(-1)
+    setSlow((v) => !v)
+  }
 
   return (
     <>
@@ -219,7 +234,7 @@ function ReadStage({ scene, phrases, onNext }) {
             <div className="bubble">
               <div className="bubble-mizo">
                 {lineText(line)}
-                <SpeakButton text={lineText(line)} size="sm" />
+                <SpeakButton text={lineText(line)} size="sm" rate={rate} />
               </div>
               <div className="bubble-ja">{lineJa(line)}</div>
             </div>
@@ -230,6 +245,9 @@ function ReadStage({ scene, phrases, onNext }) {
       <div className="cta-row">
         <button className="btn secondary" onClick={playAll}>
           {playing >= 0 ? '🔉 再生中…' : '🔉 通しで聞く'}
+        </button>
+        <button className={`btn sm ${slow ? 'secondary' : 'ghost'}`} onClick={toggleSlow}>
+          {slow ? '🐢 ゆっくり' : '🐇 ふつう'}
         </button>
         <button className="btn primary big" onClick={onNext}>覚えたか試す →</button>
       </div>
@@ -259,7 +277,7 @@ function ReadStage({ scene, phrases, onNext }) {
                     語の意味と組み立て方は確認できていますが、これが自然な言い方かは未確認です。
                   </p>
                 )}
-                <SpeakButton text={p.mizo} size="sm" />
+                <SpeakButton text={p.mizo} size="sm" rate={rate} />
               </div>
             )}
           </div>
@@ -387,7 +405,7 @@ function ActStage({ scene, onRecord, onNext }) {
             <div className="bubble">
               <div className="bubble-mizo">
                 {lineText(line)}
-                <SpeakButton text={lineText(line)} size="sm" />
+                <SpeakButton text={lineText(line)} size="sm" rate={rate} />
               </div>
               <div className="bubble-ja">{lineJa(line)}</div>
             </div>

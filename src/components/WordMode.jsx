@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { pickWords, charsOfWord, shuffle } from '../data/words'
 import SpeakButton from './SpeakButton'
-import { speakText, speakSequence, stopSpeaking } from '../lib/speech'
+import { speakText, speakSequence, stopSpeaking, RATE } from '../lib/speech'
 import { playCorrect, playWrong, playClear } from '../lib/sfx'
 
 /**
@@ -67,11 +67,16 @@ export default function WordMode({ learnedIds, onBack, onAnswer }) {
 
   // 1字ずつ光らせながら読み、最後に通しで読む。
   // 1つ言い終えてから次に移るので、字と字が途中で切れない。
+  // 1字ずつはゆっくり、最後の通し読みだけ速さを上げる。
+  // 同じ速さだと「通しで読んだ」感じが出ないため。
   const playAlong = () =>
-    speakSequence([...syls.map((s) => s.text), word.word], {
-      gap: 220,
-      onStep: (i) => setLit(i >= 0 && i < syls.length ? i : -1),
-    })
+    speakSequence(
+      [
+        ...syls.map((s) => ({ text: s.text, rate: RATE.slow })),
+        { text: word.word, rate: RATE.word },
+      ],
+      { gap: 220, onStep: (i) => setLit(i >= 0 && i < syls.length ? i : -1) }
+    )
 
   const startQuiz = () => {
     // 意味あて4択。ダミーは他の単語の意味から
@@ -127,7 +132,7 @@ export default function WordMode({ learnedIds, onBack, onAnswer }) {
             <button
               key={i}
               className={`word-syl ${lit === i ? 'lit' : ''}`}
-              onClick={() => speakText(s.text)}
+              onClick={() => speakText(s.text, { rate: RATE.slow })}
               title="タップで発音"
             >
               <span className="ws-glyph">{s.text}</span>
