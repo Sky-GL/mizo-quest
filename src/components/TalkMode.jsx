@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import SpeakButton from './SpeakButton'
-import { speakText } from '../lib/speech'
+import { speakSequence, stopSpeaking } from '../lib/speech'
 import { playCorrect, playWrong, playClear } from '../lib/sfx'
 import { charScore } from '../lib/srs'
 import {
@@ -197,20 +197,24 @@ function SceneRunner({ scene, phraseStats, onBack, onAnswer, onPhrase, onSceneDo
 
 function ReadStage({ scene, phrases, onNext }) {
   const [open, setOpen] = useState(null) // 解説を開いているフレーズID
+  const [playing, setPlaying] = useState(-1) // 通し再生で今読んでいる行
 
-  // 会話を頭から通しで読み上げる
-  const playAll = async () => {
-    for (const line of scene.lines) {
-      await speakText(lineText(line))
-      await new Promise((r) => setTimeout(r, 1400))
-    }
-  }
+  // 画面を離れたら読み上げも止める
+  useEffect(() => stopSpeaking, [])
+
+  // 会話を頭から通しで読み上げる。
+  // 1行を言い終えてから次に移るので、長い行が途中で切れない。
+  const playAll = () =>
+    speakSequence(scene.lines.map(lineText), { gap: 600, onStep: setPlaying })
 
   return (
     <>
       <div className="dialog">
         {scene.lines.map((line, i) => (
-          <div key={i} className={`bubble-row ${line.who === 'A' ? 'left' : 'right'}`}>
+          <div
+            key={i}
+            className={`bubble-row ${line.who === 'A' ? 'left' : 'right'} ${playing === i ? 'playing' : ''}`}
+          >
             <span className="who">{line.who === 'A' ? '相手' : 'あなた'}</span>
             <div className="bubble">
               <div className="bubble-mizo">
@@ -224,7 +228,9 @@ function ReadStage({ scene, phrases, onNext }) {
       </div>
 
       <div className="cta-row">
-        <button className="btn secondary" onClick={playAll}>🔉 通しで聞く</button>
+        <button className="btn secondary" onClick={playAll}>
+          {playing >= 0 ? '🔉 再生中…' : '🔉 通しで聞く'}
+        </button>
         <button className="btn primary big" onClick={onNext}>覚えたか試す →</button>
       </div>
 

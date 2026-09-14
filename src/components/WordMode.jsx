@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { pickWords, charsOfWord, shuffle } from '../data/words'
 import SpeakButton from './SpeakButton'
-import { speakText } from '../lib/speech'
+import { speakText, speakSequence, stopSpeaking } from '../lib/speech'
 import { playCorrect, playWrong, playClear } from '../lib/sfx'
 
 /**
@@ -28,12 +28,16 @@ export default function WordMode({ learnedIds, onBack, onAnswer }) {
   const total = words.length
   const answering = !!quiz && !quiz.picked // 出題中で、まだ答えていない状態
 
-  // 単語が変わったら状態をリセット
+  // 単語が変わったら状態をリセットし、読み上げも止める
   useEffect(() => {
+    stopSpeaking()
     setRevealed(false)
     setLit(-1)
     setQuiz(null)
   }, [idx])
+
+  // 画面を離れたら読み上げも止める
+  useEffect(() => stopSpeaking, [])
 
   if (!word) {
     return (
@@ -61,16 +65,13 @@ export default function WordMode({ learnedIds, onBack, onAnswer }) {
     )
   }
 
-  // 1音節ずつ光らせながら読み上げる
-  const playAlong = async () => {
-    for (let i = 0; i < syls.length; i++) {
-      setLit(i)
-      speakText(syls[i].text)
-      await new Promise((r) => setTimeout(r, 620))
-    }
-    setLit(-1)
-    speakText(word.word)
-  }
+  // 1字ずつ光らせながら読み、最後に通しで読む。
+  // 1つ言い終えてから次に移るので、字と字が途中で切れない。
+  const playAlong = () =>
+    speakSequence([...syls.map((s) => s.text), word.word], {
+      gap: 220,
+      onStep: (i) => setLit(i >= 0 && i < syls.length ? i : -1),
+    })
 
   const startQuiz = () => {
     // 意味あて4択。ダミーは他の単語の意味から

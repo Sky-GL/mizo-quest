@@ -43,15 +43,57 @@ const playAudioFile = (url) =>
     audio.play().catch(reject)
   })
 
-const utter = (text, rate) => {
-  window.speechSynthesis.cancel()
-  const u = new SpeechSynthesisUtterance(text)
-  const voice = pickVoice()
-  if (voice) u.voice = voice
-  u.lang = voice ? voice.lang : 'en-IN'
-  u.rate = rate
-  window.speechSynthesis.speak(u)
+/**
+ * 読み上げの世代番号。新しい再生を始めるたびに繰り上げ、
+ * 古い連続再生のループを止めるのに使う。
+ */
+let generation = 0
+
+/** 再生中のものを止めて、新しい世代番号を返す */
+export const stopSpeaking = () => {
+  generation += 1
+  if (speechSupported()) window.speechSynthesis.cancel()
+  return generation
 }
+
+/**
+ * onend が来ない環境があるので、保険として打ち切る時間を見積もる。
+ * 実際の発話より必ず長くなるよう、多めに取る。
+ */
+const estimateMs = (text, rate) =>
+  Math.min(20000, (900 + text.length * 130) / Math.max(rate, 0.3))
+
+/**
+ * 1回分の発話。**終わるまで待つ** Promise を返すのが要点。
+ * 以前は投げっぱなしだったので、次の発話の cancel() が前の文を途中で切っていた。
+ */
+const utter = (text, rate) =>
+  new Promise((resolve) => {
+    const u = new SpeechSynthesisUtterance(text)
+    const voice = pickVoice()
+    if (voice) u.voice = voice
+    u.lang = voice ? voice.lang : 'en-IN'
+    u.rate = rate
+
+    let settled = false
+    const finish = (result) => {
+      if (settled) return
+      settled = true
+      clearTimeout(timer)
+      resolve(result)
+    }
+    const timer = setTimeout(() => finish('tts'), estimateMs(text, rate))
+    u.onend = () => finish('tts')
+    u.onerror = () => finish('none')
+
+    try {
+      window.speechSynthesis.speak(u)
+    } catch {
+      finish('none')
+    }
+  })
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 /**
  * 文字を発音する。実録音(mp3)があればそちらを優先する。
@@ -61,6 +103,8 @@ export const speak = async (char, { rate = 0.7 } = {}) => {
   const text = char?.speak || char?.letter
   if (!text) return 'none'
 
+  stopSpeaking()
+
   try {
     await playAudioFile(char.audioUrl)
     return 'file'
@@ -68,20 +112,44 @@ export const speak = async (char, { rate = 0.7 } = {}) => {
     /* 実録音がなければTTSの近似音へ */
   }
 
-  if (hasVoice()) {
-    try {
-      utter(text, rate)
-      return 'tts'
-    } catch {
-      /* noop */
-    }
-  }
-  return 'none'
+  if (!hasVoice()) return 'none'
+  return utter(text, rate)
 }
 
-/** 任意の文字列(単語や合成音節)を読み上げる */
+/** 任意の文字列(単語や文)を読み上げる。終わるまで待つ */
 export const speakText = async (text, { rate = 0.7 } = {}) => {
   if (!text || !hasVoice()) return 'none'
-  utter(text, rate)
+  stopSpeaking()
+  return utter(text, rate)
+}
+
+/**
+ * 複数の文を続けて読み上げる。1つ言い終えてから次に移るので、
+ * 会話を通しで聞いたときに文が途中で切れない。
+ * 新しい再生が始まったら途中でも止める。
+ *
+ * @param {string[]} items 読み上げる文の並び
+ * @param {{gap?: number, rate?: number, onStep?: (i: number) => void}} opts
+ *        gap は文と文のあいだの無音(ms)。onStep には今読んでいる位置が渡る(終了時は -1)。
+ */
+export const speakSequence = async (items, { gap = 500, rate = 0.7, onStep } = {}) => {
+  const list = (items || []).filter(Boolean)
+  if (!list.length || !hasVoice()) {
+    onStep?.(-1)
+    return 'none'
+  }
+
+  const mine = stopSpeaking()
+  const alive = () => mine === generation
+
+  for (let i = 0; i < list.length; i++) {
+    if (!alive()) return 'stopped'
+    onStep?.(i)
+    await utter(list[i], rate)
+    if (!alive()) return 'stopped'
+    if (i < list.length - 1) await sleep(gap)
+  }
+
+  onStep?.(-1)
   return 'tts'
 }
