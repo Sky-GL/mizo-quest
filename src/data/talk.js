@@ -22,6 +22,7 @@ export const SCENE_GROUPS = [
   { key: 'basic', title: 'まずこれだけ', emoji: '🌱', note: 'この4場面が言えれば、あいさつして名乗って助けを求められる' },
   { key: 'town', title: '街で使う', emoji: '🏘️', note: '食べる・買う・たずねる・約束する' },
   { key: 'talk', title: '人と話す', emoji: '💬', note: '世間話をして、気持ちよく別れる' },
+  { key: 'react', title: '気持ちを返す', emoji: '😮', note: '相づちを打ち、驚き、気持ちを言う。会話が続くようになる' },
 ]
 
 export const scenesOfGroup = (key) => SCENES.filter((s) => s.group === key)

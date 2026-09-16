@@ -55,3 +55,22 @@
 {"id": "dam_takin", "mizo": "Dam takin.", "kana": "ダム タキン", "ja": "またね。", "literal": "健康・に", "note": "dam(健康)+ takin(〜に)。「Dam takin le」とも言う。去る人にも残る人にも使える。", "scene": "bye", "level": 2}
 {"id": "mangtha", "mizo": "Mangṭha.", "kana": "マンタ", "ja": "さようなら。", "literal": "さようなら", "note": "★Ṭ。別れの定番。Dam takin(またね)と並べて覚える。", "scene": "bye", "level": 1}
 {"id": "muttui", "mizo": "Muttui le.", "kana": "ムットゥイ レ", "ja": "おやすみなさい。", "literal": "おやすみ・ね", "note": "寝る前のあいさつ。mut=眠る に由来する決まり文句で、語をばらして考えなくてよい。", "scene": "bye", "level": 2}
+{"id":"aw","mizo":"Aw.","kana":"オ","ja":"うん。","literal":"うん","note":"一番よく使う相づち。★AW。「Aw, nei e(うん、持ってるよ)」のように文の頭にも置く。","scene":"react","level":1}
+{"id":"awle","mizo":"Aw le.","kana":"オ レ","ja":"オッケー。/ わかった。","literal":"うん・ね","note":"Aw に le が付いた形。話を受けて次に進むときの一言。Muttui le の le と同じ。","scene":"react","level":1}
+{"id":"a_dik_chiah","mizo":"A dik chiah.","kana":"ア ディク チア","ja":"そのとおり。","literal":"それは・正しい・ちょうど","note":"dik=正しい。強く同意するとき。A ṭha e より踏み込んだ相づち。","scene":"react","level":2}
+{"id":"i_ti_tak_tak","mizo":"I ti tak tak em?","kana":"イ ティ タク タク エム","ja":"マジですか?","literal":"あなたは・言う・本当に・本当に・か","note":"tak tak と繰り返して「本当に本当に」。驚いて聞き返すときの定番。","scene":"react","level":2}
+{"id":"ka_ring_lo","mizo":"Ka ring lo.","kana":"カ リン ロ","ja":"信じられない。","literal":"私は・信じる・ない","note":"ring=信じる。また否定の lo。Ka ring lo emai. と言うとさらに強い。","scene":"react","level":2}
+{"id":"min_bawl_suh","mizo":"Min bawl suh aw.","kana":"ミン ボル ス オ","ja":"からかわないで。","literal":"私を・いじる・するな・ね","note":"min=私を。suh=〜するな(禁止)。Min pui rawh(助けて)の min- と同じ形で、rawh(〜して)の反対が suh。★AWが2回。","scene":"react","level":3}
+{"id":"ka_uang_lo","mizo":"Aih, ka uang lo.","kana":"アイ カ ウアン ロ","ja":"いや、冗談じゃないって。","literal":"いいえ・私は・ふざける・ない","note":"Aih=いいえ。疑われたときの返し。","scene":"react","level":3}
+{"id":"ekhai","mizo":"Ekhai!","kana":"エカイ","ja":"うわっ! / えっ!","literal":"(驚きの声)","note":"驚いたときの感嘆詞。あいさつと間違われやすいが、Chibai とは別物で「やあ」の意味はない。","scene":"react","level":1}
+{"id":"ka_lawmpui","mizo":"Ka lawmpui che.","kana":"カ ロムプイ チェ","ja":"おめでとう。","literal":"私は・共に喜ぶ・あなたを","note":"Ka lawm e(ありがとう)と同じ lawm=喜ぶ。che=あなたを。★AW。","scene":"react","level":2}
+{"id":"japan_kal","mizo":"Japan ah ka kal dawn.","kana":"ジャパン ア カ カル ドン","ja":"日本へ行きます。","literal":"日本・へ・私は・行く・つもり","note":"-ah=〜へ/〜に。行き先を頭に置くだけ。Naktuk ah(明日に)と同じ -ah。★AW。","scene":"react","level":2}
+{"id":"a_va_nuam","mizo":"A va nuam em!","kana":"ア ヴァ ヌアム エム","ja":"いいねぇ! / 楽しそう!","literal":"それは・なんと・楽しい・こと","note":"A va 〜 em! で挟むと「なんて〜なんだ!」という感嘆になる。nuam=楽しい/心地よい。","scene":"react","level":3,"uncertain":true}
+{"id":"ka_hlim","mizo":"Ka hlim.","kana":"カ フリム","ja":"うれしい。","literal":"私は・うれしい","note":"hlim=うれしい/陽気な。Ka dam(元気だ)と同じ作り。","scene":"feel","level":1}
+{"id":"ka_hlim_em_em","mizo":"Ka hlim em em a ni.","kana":"カ フリム エム エム ア ニ","ja":"すごくうれしいです。","literal":"私は・うれしい・とても・である","note":"★em em が「とても」。形容詞の後ろに足すだけで強調になる。疑問の em とは別物。","scene":"feel","level":2}
+{"id":"ka_lungngai","mizo":"Ka lungngai.","kana":"カ ルンガイ","ja":"悲しい。","literal":"私は・悲しい","note":"lung=心 から来た語。★NG。Ka hlim と対で覚える。","scene":"feel","level":2}
+{"id":"ka_hah","mizo":"Ka hah.","kana":"カ ハ","ja":"疲れた。","literal":"私は・疲れる","note":"hah=疲れる。hah + dam(健康)で hahdam=休む になる。","scene":"feel","level":1}
+{"id":"ka_hah_bawn","mizo":"Ka hah bawn tawp.","kana":"カ ハ ボン トプ","ja":"疲れ果てました。","literal":"私は・疲れる・すっかり","note":"bawn tawp で「もう限界まで」。★AWが2回。語末の -p は開放せず止める。","scene":"feel","level":3}
+{"id":"ka_hmangaih","mizo":"Ka hmangaih che.","kana":"カ フマンガイ チェ","ja":"愛しています。","literal":"私は・愛する・あなたを","note":"hmangaihna(愛)の動詞形。che=あなたを。Ka lawmpui che の che と同じ。","scene":"feel","level":2}
+{"id":"a_nuihzathlak","mizo":"A nuihzathlak hle mai!","kana":"ア ヌイザトラク レ マイ","ja":"めっちゃ面白い!","literal":"それは・おかしい・とても","note":"★hle mai が「とても」。em em と同じ働きで、こちらのほうが口語的。","scene":"feel","level":3}
+{"id":"a_tui_hle_mai","mizo":"A tui hle mai!","kana":"ア トゥイ レ マイ","ja":"すごくおいしい!","literal":"それは・おいしい・とても","note":"A tui e(おいしい)に hle mai を足しただけ。強調は後ろに足す、が分かる例。","scene":"feel","level":2}

@@ -130,8 +130,13 @@ function SceneList({ phraseStats, sceneStats, onBack, onSelect }) {
 
 function SceneRunner({ scene, phraseStats, onBack, onAnswer, onPhrase, onSceneDone }) {
   const [stage, setStage] = useState('read')
+  const [slow, setSlow] = useState(false) // ゆっくり読ませるか。3段で共有する
   const phrases = useMemo(() => phrasesOfScene(scene), [scene])
   const stageIdx = STAGES.findIndex((s) => s.key === stage)
+
+  // 文は普通の速さで読む。ゆっくり読ませると単語がぶつ切りに聞こえて流れなくなる。
+  // 聞き取れないときだけ「ゆっくり」に落とせるようにしてある。
+  const rate = slow ? RATE.slow : RATE.sentence
 
   // 正解/不正解を、フレーズの成績と、その文に含まれる字の成績の両方へ流す
   const record = (phrase, ok) => {
@@ -176,18 +181,31 @@ function SceneRunner({ scene, phraseStats, onBack, onAnswer, onPhrase, onSceneDo
       </div>
       <p className="stage-hint">{STAGES[stageIdx].hint}</p>
 
-      {stage === 'read' && <ReadStage scene={scene} phrases={phrases} onNext={goNext} />}
+      {stage === 'read' && (
+        <ReadStage
+          scene={scene}
+          phrases={phrases}
+          rate={rate}
+          slow={slow}
+          onToggleSlow={() => {
+            stopSpeaking()
+            setSlow((v) => !v)
+          }}
+          onNext={goNext}
+        />
+      )}
       {stage === 'pick' && (
         <PickStage
           key={`pick-${scene.id}`}
           phrases={phrases}
           phraseStats={phraseStats}
+          rate={rate}
           onRecord={record}
           onNext={goNext}
         />
       )}
       {stage === 'act' && (
-        <ActStage key={`act-${scene.id}`} scene={scene} onRecord={record} onNext={goNext} />
+        <ActStage key={`act-${scene.id}`} scene={scene} rate={rate} onRecord={record} onNext={goNext} />
       )}
     </div>
   )
@@ -195,17 +213,12 @@ function SceneRunner({ scene, phraseStats, onBack, onAnswer, onPhrase, onSceneDo
 
 /* ---------------- 1段目: 聞く ---------------- */
 
-function ReadStage({ scene, phrases, onNext }) {
+function ReadStage({ scene, phrases, rate, slow, onToggleSlow, onNext }) {
   const [open, setOpen] = useState(null) // 解説を開いているフレーズID
   const [playing, setPlaying] = useState(-1) // 通し再生で今読んでいる行
-  const [slow, setSlow] = useState(false) // ゆっくり読ませるか
 
   // 画面を離れたら読み上げも止める
   useEffect(() => stopSpeaking, [])
-
-  // 文は普通の速さで読む。ゆっくり読ませると単語がぶつ切りに聞こえて流れなくなる。
-  // 聞き取れないときだけ「ゆっくり」に落とせるようにしてある。
-  const rate = slow ? RATE.slow : RATE.sentence
 
   // 会話を頭から通しで読み上げる。
   // 1行を言い終えてから次に移るので、長い行が途中で切れない。
@@ -217,9 +230,8 @@ function ReadStage({ scene, phrases, onNext }) {
     })
 
   const toggleSlow = () => {
-    stopSpeaking()
     setPlaying(-1)
-    setSlow((v) => !v)
+    onToggleSlow()
   }
 
   return (
@@ -289,7 +301,7 @@ function ReadStage({ scene, phrases, onNext }) {
 
 /* ---------------- 2段目: 選ぶ ---------------- */
 
-function PickStage({ phrases, phraseStats, onRecord, onNext }) {
+function PickStage({ phrases, phraseStats, rate, onRecord, onNext }) {
   // 苦手なフレーズから先に出す(SRSの優先度をそのまま流用)
   const [queue] = useState(() =>
     [...phrases].sort((a, b) => charScore(phraseStats[b.id]) - charScore(phraseStats[a.id]))
@@ -357,7 +369,7 @@ function PickStage({ phrases, phraseStats, onRecord, onNext }) {
           <p className="fb-kana">{target.kana} — 直訳: {target.literal}</p>
           <p className="fb-note">{target.note}</p>
           <div className="cta-row">
-            <SpeakButton text={target.mizo} size="sm" />
+            <SpeakButton text={target.mizo} size="sm" rate={rate} />
             <button className="btn primary" onClick={next} autoFocus>
               {idx + 1 >= queue.length ? `会話してみる(${score}/${queue.length}正解) →` : '次へ →'}
             </button>
@@ -370,7 +382,7 @@ function PickStage({ phrases, phraseStats, onRecord, onNext }) {
 
 /* ---------------- 3段目: 会話する(組み立て) ---------------- */
 
-function ActStage({ scene, onRecord, onNext }) {
+function ActStage({ scene, rate, onRecord, onNext }) {
   // あなた(B)の番だけを自分で組み立てる
   const myTurns = useMemo(
     () => scene.lines.map((l, i) => ({ ...l, i })).filter((l) => l.who === 'B'),
@@ -417,6 +429,7 @@ function ActStage({ scene, onRecord, onNext }) {
       <TurnBuilder
         key={turn}
         line={current}
+        rate={rate}
         isLast={turn + 1 >= myTurns.length}
         onDone={finishTurn}
       />
@@ -425,7 +438,7 @@ function ActStage({ scene, onRecord, onNext }) {
 }
 
 /** 1回分の「自分の番」を組み立てさせる */
-function TurnBuilder({ line, isLast, onDone }) {
+function TurnBuilder({ line, rate, isLast, onDone }) {
   const answer = lineText(line)
   const target = useMemo(() => tokenize(answer), [answer])
   const [tiles] = useState(() => shuffle(tokenize(answer).map((t, i) => ({ t, key: `${t}-${i}` }))))
@@ -496,7 +509,7 @@ function TurnBuilder({ line, isLast, onDone }) {
           <strong>{missed ? 'もう一度、声に出してみよう' : '言えた!'}</strong>
           <p className="fb-kana">{answer} — {kana}</p>
           <div className="cta-row">
-            <SpeakButton text={answer} size="sm" label="聞く" />
+            <SpeakButton text={answer} size="sm" label="聞く" rate={rate} />
             {/* 間違えた場合は不正解として記録する(SRSで優先的に出し直すため) */}
             <button className="btn primary" onClick={() => onDone(!missed)} autoFocus>
               {isLast ? 'この場面を終える →' : '会話を続ける →'}

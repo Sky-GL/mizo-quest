@@ -46,7 +46,7 @@ export default function PatternDrill({ onBack, onAnswer }) {
             onClick={() => setPatternId(p.id)}
           >
             <span>{p.emoji}</span>
-            {p.id === 'subject' ? '主語' : p.id === 'negate' ? '否定' : '質問'}
+            {p.short}
           </button>
         ))}
       </div>
@@ -203,7 +203,8 @@ function TransformDrill({ pattern, onAnswer }) {
   const [score, setScore] = useState(0)
 
   const q = questions[idx]
-  const options = useMemo(() => (q ? tailOptions(q.to) : []), [q])
+  // 助詞の入れ替えで誤答が作れない型(強調など)は、データ側の options を使う
+  const options = useMemo(() => (q ? (q.options ? shuffle(q.options) : tailOptions(q.to)) : []), [q])
 
   if (!q) return null
 
