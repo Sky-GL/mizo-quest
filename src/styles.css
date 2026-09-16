@@ -578,19 +578,29 @@ body {
 .mode-row.talk-row .mode-card strong { font-size: 16px; }
 
 /* --- 場面選び --- */
-.talk-scenes { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 12px; }
+/* 場面は正方形のタイルで並べる。14個を一望できるほうが選びやすい */
+.talk-scenes { display: grid; grid-template-columns: repeat(4, minmax(0, 190px)); gap: 12px; }
 .scene-card {
-  display: flex; flex-direction: column; gap: 6px; text-align: left; cursor: pointer;
-  background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 15px;
+  position: relative; aspect-ratio: 1; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; cursor: pointer;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 13px 10px 10px;
   color: var(--text); transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
 }
 .scene-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 12px 30px var(--shadow); }
-.scene-top { display: flex; align-items: center; gap: 9px; }
-.scene-emoji { font-size: 22px; }
-.scene-top strong { font-size: 16px; }
-.scene-sit { font-size: 12px; color: var(--accent); font-weight: 700; margin: 0; }
-.scene-goal { font-size: 11px; color: var(--muted); line-height: 1.5; margin: 0; flex: 1; }
-.scene-bar { height: 5px; border-radius: 99px; background: var(--line-soft); overflow: hidden; margin-top: 4px; }
+.scene-body {
+  flex: 1; width: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+}
+.scene-emoji { font-size: 34px; line-height: 1.1; }
+.scene-name { font-size: 16px; line-height: 1.3; }
+/* 場面の状況は2行で打ち切る(タイルの高さを揃えるため) */
+.scene-sit {
+  font-size: 11px; color: var(--muted); line-height: 1.5; margin: 0; padding: 0 4px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.scene-foot { width: 100%; display: flex; flex-direction: column; gap: 4px; }
+.scene-bar { height: 4px; border-radius: 99px; background: var(--line-soft); overflow: hidden; }
 .scene-fill { height: 100%; background: var(--accent); transition: width .4s ease; }
 .scene-count { font-size: 10px; color: var(--muted); }
 /* 場面のまとまり */
@@ -598,7 +608,16 @@ body {
 .group-head { display: flex; align-items: baseline; gap: 8px; font-size: 15px; margin: 0 0 10px; flex-wrap: wrap; }
 .group-head small { font-size: 11px; color: var(--muted); font-weight: 500; }
 .scene-card.done { border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
-.scene-check { margin-left: auto; color: var(--accent); font-weight: 800; font-size: 15px; }
+.scene-check {
+  position: absolute; top: 7px; right: 9px;
+  color: var(--accent); font-weight: 800; font-size: 13px;
+}
+/* カードから外した「この場面の目標」は場面画面のほうに出す */
+.scene-goal-line {
+  font-size: 12px; color: var(--muted); text-align: center; margin: 0 0 14px;
+  padding: 7px 12px; background: var(--panel); border-radius: 999px; display: inline-block;
+  width: 100%; box-sizing: border-box;
+}
 
 /* 話者の確認が取れていないフレーズの印 */
 .ph-flag {
@@ -716,8 +735,13 @@ body {
 .fb-kana { font-size: 12px; color: var(--muted); margin: 4px 0; }
 .fb-note { font-size: 12px; color: var(--muted); line-height: 1.7; margin: 4px 0 8px; }
 
+/* 4列だと1枚が小さくなりすぎる幅では2列に落とす */
+@media (max-width: 680px) {
+  .talk-scenes { grid-template-columns: repeat(2, minmax(0, 200px)); }
+}
+
 @media (max-width: 520px) {
   .bubble-row { max-width: 92%; }
   .pick-ja { font-size: 17px; }
-  .talk-scenes { grid-template-columns: 1fr; }
+  .talk-scenes { grid-template-columns: repeat(2, minmax(0, 200px)); }
 }

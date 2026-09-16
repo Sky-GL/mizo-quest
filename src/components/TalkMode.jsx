@@ -92,18 +92,24 @@ function SceneList({ phraseStats, sceneStats, onBack, onSelect }) {
               const known = phrases.filter((p) => (phraseStats[p.id]?.correct || 0) > 0).length
               const done = sceneStats[s.id]?.done
               return (
-                <button key={s.id} className={`scene-card ${done ? 'done' : ''}`} onClick={() => onSelect(s.id)}>
-                  <div className="scene-top">
+                <button
+                  key={s.id}
+                  className={`scene-card ${done ? 'done' : ''}`}
+                  title={`${s.situation} — ${s.goal}`}
+                  onClick={() => onSelect(s.id)}
+                >
+                  {done && <span className="scene-check">✓</span>}
+                  <span className="scene-body">
                     <span className="scene-emoji">{s.emoji}</span>
-                    <strong>{s.title}</strong>
-                    {done && <span className="scene-check">✓</span>}
+                    <strong className="scene-name">{s.title}</strong>
+                    <span className="scene-sit">{s.situation}</span>
+                  </span>
+                  <div className="scene-foot">
+                    <div className="scene-bar">
+                      <div className="scene-fill" style={{ width: `${(known / phrases.length) * 100}%` }} />
+                    </div>
+                    <span className="scene-count">{known}/{phrases.length}</span>
                   </div>
-                  <p className="scene-sit">{s.situation}</p>
-                  <p className="scene-goal">{s.goal}</p>
-                  <div className="scene-bar">
-                    <div className="scene-fill" style={{ width: `${(known / phrases.length) * 100}%` }} />
-                  </div>
-                  <span className="scene-count">{known}/{phrases.length} フレーズ</span>
                 </button>
               )
             })}
@@ -166,6 +172,8 @@ function SceneRunner({ scene, phraseStats, onBack, onAnswer, onPhrase, onSceneDo
           </div>
         </div>
       </div>
+
+      <p className="scene-goal-line">🎯 {scene.goal}</p>
 
       <div className="stage-row">
         {STAGES.map((s, i) => (
