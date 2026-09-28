@@ -277,15 +277,16 @@ function ReadStage({ scene, phrases, rate, slow, onToggleSlow, onNext }) {
         {phrases.map((p) => (
           <div key={p.id} className={`phrase-item ${open === p.id ? 'open' : ''}`}>
             <button className="phrase-head" onClick={() => setOpen(open === p.id ? null : p.id)}>
-              <div>
-                <div className="ph-mizo">{p.mizo}</div>
-                <div className="ph-kana">{p.kana}</div>
-              </div>
-              <div className="ph-right">
-                {p.uncertain && <span className="ph-flag" title="公開資料で同じ言い回しの用例が見つからなかったもの">要確認</span>}
+              {/* ミゾ語・カナ・意味を縦に積む。横に離すと視線が長く動いて読みにくい */}
+              <span className="ph-main">
+                <span className="ph-mizo">{p.mizo}</span>
+                <span className="ph-kana">{p.kana}</span>
                 <span className="ph-ja">{p.ja}</span>
+              </span>
+              <span className="ph-side">
+                {p.uncertain && <span className="ph-flag" title="公開資料で同じ言い回しの用例が見つからなかったもの">要確認</span>}
                 <span className="ph-caret">{open === p.id ? '−' : '+'}</span>
-              </div>
+              </span>
             </button>
             {open === p.id && (
               <div className="phrase-body">
