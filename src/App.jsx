@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import HUD from './components/HUD'
 import StepMap from './components/StepMap'
 import Flashcards from './components/Flashcards'
@@ -11,8 +11,19 @@ import TalkMode from './components/TalkMode'
 import PatternDrill from './components/PatternDrill'
 import GrammarMap from './components/GrammarMap'
 import { useProgress } from './hooks/useProgress'
+import { usePersistentState, readResume, writeResume, clearResume } from './hooks/usePersistentState'
 import { buildStepQuiz, buildReviewQuiz } from './lib/quiz'
 import { stepMeta, TONE_STEP } from './data/steps'
+
+const VIEW_NAMES = ['map', 'cards', 'quiz', 'lab', 'review', 'words', 'memory', 'challenge', 'talk', 'pattern', 'grammar']
+
+/** 保存してあった画面がいまのデータで開けるか */
+const isValidView = (v) => {
+  if (!v || !VIEW_NAMES.includes(v.name)) return false
+  if (['cards', 'quiz'].includes(v.name) && !stepMeta(v.step)) return false
+  if (['quiz', 'review'].includes(v.name) && !(Array.isArray(v.questions) && v.questions.length)) return false
+  return true
+}
 
 export default function App() {
   const {
@@ -27,7 +38,36 @@ export default function App() {
     dismissMigration,
   } = useProgress()
   // view: { name: 'map' | 'cards' | 'quiz' | 'lab' | 'review' | 'words' | 'memory' | 'challenge' | 'talk' | 'pattern' | 'grammar', step?, questions?, patternId? }
-  const [view, setView] = useState({ name: 'map' })
+  // どの画面にいるかを端末に残す。スマホでタブが読み込み直されても同じ画面に戻れる
+  const [view, setView] = usePersistentState('view', { name: 'map' }, isValidView)
+
+  // スクロール位置も残し、開き直したときだけ戻す(画面内の移動では触らない)
+  useEffect(() => {
+    const y = readResume('scroll')
+    if (typeof y === 'number' && y > 0) {
+      // 中身が描画されて高さが出るまで少し待ちながら合わせる
+      let tries = 0
+      const tick = () => {
+        window.scrollTo(0, y)
+        if (Math.abs(window.scrollY - y) > 2 && tries++ < 20) setTimeout(tick, 60)
+      }
+      setTimeout(tick, 0)
+    }
+    let frame = 0
+    const save = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => writeResume('scroll', Math.round(window.scrollY)))
+    }
+    const saveNow = () => writeResume('scroll', Math.round(window.scrollY))
+    window.addEventListener('scroll', save, { passive: true })
+    window.addEventListener('pagehide', saveNow)
+    document.addEventListener('visibilitychange', saveNow)
+    return () => {
+      window.removeEventListener('scroll', save)
+      window.removeEventListener('pagehide', saveNow)
+      document.removeEventListener('visibilitychange', saveNow)
+    }
+  }, [])
 
   // 一度でも解答した文字のID集合(単語モード/神経衰弱の出題範囲に使う)
   const learnedIds = useMemo(() => new Set(Object.keys(progress.chars)), [progress.chars])
@@ -42,6 +82,7 @@ export default function App() {
 
   const handleReset = () => {
     if (window.confirm('学習の進捗をすべて消去します。よろしいですか?')) {
+      clearResume()
       reset()
       goMap()
     }
@@ -90,6 +131,7 @@ export default function App() {
         {view.name === 'pattern' && (
           <PatternDrill
             key={view.key}
+            sid={view.key}
             initial={view.patternId}
             onBack={goMap}
             onAnswer={recordAnswer}
@@ -105,7 +147,7 @@ export default function App() {
         )}
 
         {view.name === 'words' && (
-          <WordMode key={view.key} learnedIds={learnedIds} onBack={goMap} onAnswer={recordAnswer} />
+          <WordMode key={view.key} sid={view.key} learnedIds={learnedIds} onBack={goMap} onAnswer={recordAnswer} />
         )}
 
         {view.name === 'challenge' && (
@@ -142,6 +184,7 @@ export default function App() {
         {view.name === 'quiz' && (
           <Quiz
             key={view.key}
+            sid={view.key}
             title={`STEP ${view.step} ${stepMeta(view.step).title}`}
             accent={stepMeta(view.step).color}
             questions={view.questions}
@@ -158,6 +201,7 @@ export default function App() {
         {view.name === 'review' && (
           <Quiz
             key={view.key}
+            sid={view.key}
             title="復習モード(苦手優先)"
             accent="var(--c-review)"
             questions={view.questions}

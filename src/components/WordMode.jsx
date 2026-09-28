@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { usePersistentState } from '../hooks/usePersistentState'
 import { pickWords, charsOfWord, shuffle } from '../data/words'
 import SpeakButton from './SpeakButton'
 import CopyButton from './CopyButton'
@@ -13,16 +14,20 @@ import { playCorrect, playWrong, playClear } from '../lib/sfx'
 const toSyllables = (word) =>
   charsOfWord(word).map((c) => ({ base: c, text: c.letter, read: c.ipa, kana: c.kana }))
 
-export default function WordMode({ learnedIds, onBack, onAnswer }) {
+export default function WordMode({ sid, learnedIds, onBack, onAnswer }) {
   // 出題する単語はマウント時に確定させる。
   // 解答するたびに onAnswer で学習記録が変わるので、props を依存にすると途中で並びが変わってしまう。
-  const [words] = useState(() => pickWords(learnedIds, 10))
-  const [idx, setIdx] = useState(0)
-  const [revealed, setRevealed] = useState(false)
+  // 並び・何語目・得点・出題中の選択肢は端末に残し、読み込み直しても同じ単語から続ける
+  const [st, setSt] = usePersistentState(
+    'words',
+    () => ({ sid, words: pickWords(learnedIds, 10), idx: 0, score: 0, done: false, quiz: null, revealed: false }),
+    (v) => v.sid === sid && Array.isArray(v.words) && v.words.length > 0 && v.idx < v.words.length
+  )
+  const field = (k) => (x) => setSt((s) => ({ ...s, [k]: typeof x === 'function' ? x(s[k]) : x }))
+  const { words, idx, revealed, quiz, score, done } = st
+  const [setIdx, setRevealed, setQuiz, setScore, setDone] = ['idx', 'revealed', 'quiz', 'score', 'done'].map(field)
   const [lit, setLit] = useState(-1) // 音節を1つずつ光らせる位置
-  const [quiz, setQuiz] = useState(null) // { options, picked }
-  const [score, setScore] = useState(0)
-  const [done, setDone] = useState(false)
+  const firstRun = useRef(true)
 
   const word = words[idx]
   const syls = useMemo(() => (word ? toSyllables(word) : []), [word])
@@ -32,6 +37,11 @@ export default function WordMode({ learnedIds, onBack, onAnswer }) {
   // 単語が変わったら状態をリセットし、読み上げも止める
   useEffect(() => {
     stopSpeaking()
+    // 開き直した直後は保存してあった状態をそのまま使う
+    if (firstRun.current) {
+      firstRun.current = false
+      return
+    }
     setRevealed(false)
     setLit(-1)
     setQuiz(null)

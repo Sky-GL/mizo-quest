@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { usePersistentState } from '../hooks/usePersistentState'
 import { stepMeta, charById } from '../data/steps'
 import SpeakButton from './SpeakButton'
 import SoundPair from './SoundPair'
@@ -6,24 +7,26 @@ import ToneCurve from './ToneCurve'
 import { toneShape } from '../data/steps'
 import { playCorrect, playWrong, playClear } from '../lib/sfx'
 
-export default function Quiz({ title, accent = 'var(--accent-base)', questions, onAnswer, onFinish, onBack, onRetry }) {
-  const [i, setI] = useState(0)
-  const [picked, setPicked] = useState(null)
-  const [score, setScore] = useState(0)
-  const [combo, setCombo] = useState(0)
-  const [maxCombo, setMaxCombo] = useState(0)
-  const [done, setDone] = useState(false)
-  const [wrongIds, setWrongIds] = useState([])
-  const [result, setResult] = useState(null)
+const fresh = (sid) => ({
+  sid, i: 0, picked: null, score: 0, combo: 0, maxCombo: 0, done: false, wrongIds: [], result: null,
+})
+
+export default function Quiz({ sid, title, accent = 'var(--accent-base)', questions, onAnswer, onFinish, onBack, onRetry }) {
+  // 何問目か・答えたかどうかを端末に残す。読み込み直しても同じ問題から続けられる。
+  // sid が違えば別の回なので初めから。答えた直後(picked)も残し、同じ問題を二重に採点しない
+  const [st, setSt] = usePersistentState('quiz', () => fresh(sid),
+    (v) => v.sid === sid && v.i < questions.length)
+  const set = (patch) => setSt((s) => ({ ...s, ...(typeof patch === 'function' ? patch(s) : patch) }))
+  const { i, picked, score, combo, maxCombo, done, wrongIds, result } = st
 
   const q = questions[i]
   const total = questions.length
 
-  // 集計は描画中ではなく完了後に1回だけ実行する
+  // 集計は完了後に1回だけ。再開したときに結果がもう出ていれば、二重に記録しない
   useEffect(() => {
-    if (done) {
+    if (done && !result) {
       const r = onFinish(score, total, maxCombo)
-      setResult(r)
+      set({ result: r || { cleared: false, stars: 0 } })
       if (r?.cleared) playClear()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,27 +35,24 @@ export default function Quiz({ title, accent = 'var(--accent-base)', questions, 
   const choose = (optId) => {
     if (picked) return
     const ok = optId === q.answerId
-    setPicked(optId)
     onAnswer(q.charId, ok)
-    if (ok) {
-      playCorrect()
-      setScore((s) => s + 1)
-      setCombo((c) => {
-        const n = c + 1
-        setMaxCombo((m) => Math.max(m, n))
-        return n
-      })
-    } else {
-      playWrong()
-      setCombo(0)
-      setWrongIds((w) => [...w, q.charId])
-    }
+    if (ok) playCorrect()
+    else playWrong()
+    set((s) => {
+      const combo = ok ? s.combo + 1 : 0
+      return {
+        picked: optId,
+        score: s.score + (ok ? 1 : 0),
+        combo,
+        maxCombo: Math.max(s.maxCombo, combo),
+        wrongIds: ok ? s.wrongIds : [...s.wrongIds, q.charId],
+      }
+    })
   }
 
   const next = () => {
-    setPicked(null)
-    if (i + 1 >= total) setDone(true)
-    else setI(i + 1)
+    if (i + 1 >= total) set({ picked: null, done: true })
+    else set({ picked: null, i: i + 1 })
   }
 
   if (done) {

@@ -6,13 +6,17 @@ import CopyButton from './CopyButton'
 import SoundPair from './SoundPair'
 import ToneCurve from './ToneCurve'
 import { speak } from '../lib/speech'
+import { usePersistentState } from '../hooks/usePersistentState'
 
 export default function Flashcards({ step, onQuiz, onBack, onToneLab }) {
   const meta = stepMeta(step)
   const chars = charsOfStep(step)
-  const [idx, setIdx] = useState(0)
+  // 何枚目か・どれを見たかはStepごとに残す(読み込み直しても同じカードから)
+  const [idx, setIdx] = usePersistentState(`cards:${step}:idx`, 0, (v) => Number.isInteger(v) && v >= 0 && v < chars.length)
   const [flipped, setFlipped] = useState(false)
-  const [seen, setSeen] = useState(() => new Set([0]))
+  const [seenList, setSeenList] = usePersistentState(`cards:${step}:seen`, [0], (v) => Array.isArray(v))
+  const seen = new Set(seenList.filter((i) => i < chars.length))
+  const setSeen = (f) => setSeenList((l) => [...f(new Set(l))])
   const [pairIdx, setPairIdx] = useState(0)
   const c = chars[idx]
   const pairs = pairsOf(c.id)

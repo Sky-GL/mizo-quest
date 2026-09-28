@@ -3,6 +3,7 @@ import SpeakButton from './SpeakButton'
 import CopyButton from './CopyButton'
 import { speakSequence, stopSpeaking, RATE } from '../lib/speech'
 import { playCorrect, playWrong, playClear } from '../lib/sfx'
+import { usePersistentState, clearResume } from '../hooks/usePersistentState'
 import { charScore } from '../lib/srs'
 import {
   ALL_PHRASES,
@@ -30,7 +31,8 @@ const STAGES = [
  * 眺めるだけでは定着しないので、最後は必ず自分で文を組み立てさせる。
  */
 export default function TalkMode({ phraseStats, sceneStats, onBack, onAnswer, onPhrase, onSceneDone }) {
-  const [sceneId, setSceneId] = useState(null)
+  // 開いている場面は端末に残す(読み込み直しても同じ場面に戻る)
+  const [sceneId, setSceneId] = usePersistentState('talk:scene', null, (v) => SCENES.some((s) => s.id === v))
   const scene = useMemo(() => SCENES.find((s) => s.id === sceneId) || null, [sceneId])
 
   if (!scene) {
@@ -48,7 +50,11 @@ export default function TalkMode({ phraseStats, sceneStats, onBack, onAnswer, on
       key={scene.id}
       scene={scene}
       phraseStats={phraseStats}
-      onBack={() => setSceneId(null)}
+      onBack={() => {
+        // 場面を出たら途中経過は捨てる。次に選んだときは最初から
+        clearResume(`talk:s:${scene.id}:`)
+        setSceneId(null)
+      }}
       onAnswer={onAnswer}
       onPhrase={onPhrase}
       onSceneDone={onSceneDone}
@@ -136,8 +142,9 @@ function SceneList({ phraseStats, sceneStats, onBack, onSelect }) {
 /* ---------------- シーン本体(3段) ---------------- */
 
 function SceneRunner({ scene, phraseStats, onBack, onAnswer, onPhrase, onSceneDone }) {
-  const [stage, setStage] = useState('read')
-  const [slow, setSlow] = useState(false) // ゆっくり読ませるか。3段で共有する
+  const ns = `talk:s:${scene.id}:`
+  const [stage, setStage] = usePersistentState(ns + 'stage', 'read', (v) => STAGES.some((s) => s.key === v))
+  const [slow, setSlow] = usePersistentState('talk:slow', false) // ゆっくり読ませるか。3段で共有する
   const phrases = useMemo(() => phrasesOfScene(scene), [scene])
   const stageIdx = STAGES.findIndex((s) => s.key === stage)
 
@@ -151,9 +158,15 @@ function SceneRunner({ scene, phraseStats, onBack, onAnswer, onPhrase, onSceneDo
     focusChars(phrase.mizo).forEach((id) => onAnswer(id, ok))
   }
 
+  // 段に入るときはその段の途中経過を消し、最初からやり直させる
+  const enter = (key) => {
+    clearResume(ns + key)
+    setStage(key)
+  }
+
   const goNext = () => {
     if (stageIdx + 1 < STAGES.length) {
-      setStage(STAGES[stageIdx + 1].key)
+      enter(STAGES[stageIdx + 1].key)
     } else {
       playClear()
       onSceneDone(scene.id)
@@ -181,7 +194,7 @@ function SceneRunner({ scene, phraseStats, onBack, onAnswer, onPhrase, onSceneDo
           <button
             key={s.key}
             className={`stage-chip ${s.key === stage ? 'on' : ''} ${i < stageIdx ? 'done' : ''}`}
-            onClick={() => setStage(s.key)}
+            onClick={() => s.key !== stage && enter(s.key)}
           >
             <span>{s.emoji}</span>
             {s.label}
@@ -206,6 +219,7 @@ function SceneRunner({ scene, phraseStats, onBack, onAnswer, onPhrase, onSceneDo
       {stage === 'pick' && (
         <PickStage
           key={`pick-${scene.id}`}
+          ns={ns}
           phrases={phrases}
           phraseStats={phraseStats}
           rate={rate}
@@ -214,7 +228,7 @@ function SceneRunner({ scene, phraseStats, onBack, onAnswer, onPhrase, onSceneDo
         />
       )}
       {stage === 'act' && (
-        <ActStage key={`act-${scene.id}`} scene={scene} rate={rate} onRecord={record} onNext={goNext} />
+        <ActStage key={`act-${scene.id}`} ns={ns} scene={scene} rate={rate} onRecord={record} onNext={goNext} />
       )}
     </div>
   )
@@ -316,42 +330,41 @@ function ReadStage({ scene, phrases, rate, slow, onToggleSlow, onNext }) {
 
 /* ---------------- 2段目: 選ぶ ---------------- */
 
-function PickStage({ phrases, phraseStats, rate, onRecord, onNext }) {
-  // 苦手なフレーズから先に出す(SRSの優先度をそのまま流用)
-  const [queue] = useState(() =>
-    [...phrases].sort((a, b) => charScore(phraseStats[b.id]) - charScore(phraseStats[a.id]))
-  )
-  const [idx, setIdx] = useState(0)
-  const [picked, setPicked] = useState(null)
-  const [score, setScore] = useState(0)
+const makeOptions = (target, phrases) => shuffle([target, ...distractors(target, phrases)]).map((p) => p.id)
 
-  const target = queue[idx]
-  const options = useMemo(
-    () => (target ? shuffle([target, ...distractors(target, phrases)]) : []),
-    [target, phrases]
+function PickStage({ ns, phrases, phraseStats, rate, onRecord, onNext }) {
+  // 出題順・何問目・選んだ答え・選択肢の並びまで残し、読み込み直しても同じ問題から続ける
+  const [st, setSt] = usePersistentState(
+    ns + 'pick',
+    () => {
+      // 苦手なフレーズから先に出す(SRSの優先度をそのまま流用)
+      const q = [...phrases].sort((a, b) => charScore(phraseStats[b.id]) - charScore(phraseStats[a.id]))
+      return { queue: q.map((p) => p.id), idx: 0, picked: null, score: 0, options: q.length ? makeOptions(q[0], phrases) : [] }
+    },
+    (v) => v.queue.every((id) => phraseById(id)) && v.options.every((id) => phraseById(id)) && v.idx < v.queue.length
   )
+  const set = (patch) => setSt((s) => ({ ...s, ...patch }))
+  const queue = useMemo(() => st.queue.map(phraseById), [st.queue])
+  const options = useMemo(() => st.options.map(phraseById), [st.options])
+  const { idx, score } = st
+  const picked = st.picked ? phraseById(st.picked) : null
+  const target = queue[idx]
 
   if (!target) return null
 
   const answer = (o) => {
     if (picked) return
     const ok = o.id === target.id
-    if (ok) {
-      playCorrect()
-      setScore((s) => s + 1)
-    } else {
-      playWrong()
-    }
+    ok ? playCorrect() : playWrong()
     onRecord(target, ok)
-    setPicked(o)
+    setSt((s) => ({ ...s, picked: o.id, score: s.score + (ok ? 1 : 0) }))
   }
 
   const next = () => {
     if (idx + 1 >= queue.length) {
       onNext()
     } else {
-      setIdx(idx + 1)
-      setPicked(null)
+      set({ idx: idx + 1, picked: null, options: makeOptions(queue[idx + 1], phrases) })
     }
   }
 
@@ -398,13 +411,13 @@ function PickStage({ phrases, phraseStats, rate, onRecord, onNext }) {
 
 /* ---------------- 3段目: 会話する(組み立て) ---------------- */
 
-function ActStage({ scene, rate, onRecord, onNext }) {
+function ActStage({ ns, scene, rate, onRecord, onNext }) {
   // あなた(B)の番だけを自分で組み立てる
   const myTurns = useMemo(
     () => scene.lines.map((l, i) => ({ ...l, i })).filter((l) => l.who === 'B'),
     [scene]
   )
-  const [turn, setTurn] = useState(0)
+  const [turn, setTurn] = usePersistentState(ns + 'act', 0, (v) => Number.isInteger(v) && v >= 0 && v < myTurns.length)
   const current = myTurns[turn]
 
   if (!current) return null

@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
+import { usePersistentState } from '../hooks/usePersistentState'
 import SpeakButton from './SpeakButton'
 import { playCorrect, playWrong, playClear } from '../lib/sfx'
 import { PATTERNS, buildSubjectDrill, buildTransformDrill, shuffle, focusChars } from '../data/talk'
@@ -21,10 +22,15 @@ const tailOptions = (correct) => {
  * 主語・否定・質問・程度・時・語順・お願い・後置詞の型を身につける。
  * 型が入ると、覚えたフレーズを自分で作り変えられるようになる。
  */
-export default function PatternDrill({ onBack, onAnswer, onGrammar, initial }) {
-  const [patternId, setPatternId] = useState(
-    PATTERNS.some((p) => p.id === initial) ? initial : PATTERNS[0].id
+export default function PatternDrill({ sid, onBack, onAnswer, onGrammar, initial }) {
+  // 選んでいる型は画面(sid)ごとに残す。文法ページから型を指定して来たときはそれで始める
+  const [sel, setSel] = usePersistentState(
+    'pattern:id',
+    () => ({ sid, id: PATTERNS.some((p) => p.id === initial) ? initial : PATTERNS[0].id }),
+    (v) => v.sid === sid && PATTERNS.some((p) => p.id === v.id)
   )
+  const patternId = sel.id
+  const setPatternId = (id) => setSel({ sid, id })
   const pattern = PATTERNS.find((p) => p.id === patternId)
 
   return (
@@ -72,19 +78,48 @@ export default function PatternDrill({ onBack, onAnswer, onGrammar, initial }) {
 
 /* -------- 主語接頭辞: 6つ × 動詞 -------- */
 
+/**
+ * 1セット分の出題・何問目・選んだ答え・選択肢の並びをまとめて端末に残す。
+ * 読み込み直しても同じ問題から続けられ、選び直しで二重に記録されることもない。
+ */
+function useDrill(pattern, build, makeOptions, answerOf, onAnswer) {
+  const fresh = () => {
+    const questions = build()
+    return { pid: pattern.id, questions, idx: 0, picked: null, score: 0, options: questions.length ? makeOptions(questions[0]) : [] }
+  }
+  const [st, setSt] = usePersistentState(
+    `pattern:drill:${pattern.id}`,
+    fresh,
+    (v) => v.pid === pattern.id && Array.isArray(v.questions) && v.idx < v.questions.length
+  )
+  const q = st.questions[st.idx]
+
+  const answer = (o) => {
+    if (st.picked) return
+    const ok = o === answerOf(q)
+    ok ? playCorrect() : playWrong()
+    focusChars(answerOf(q)).forEach((id) => onAnswer(id, ok))
+    setSt((s) => ({ ...s, picked: o, score: s.score + (ok ? 1 : 0) }))
+  }
+
+  const next = () => {
+    if (st.idx + 1 >= st.questions.length) {
+      // 1周したら新しい問題で次のセットへ
+      playClear()
+      setSt(fresh())
+    } else {
+      setSt((s) => ({ ...s, idx: s.idx + 1, picked: null, options: makeOptions(s.questions[s.idx + 1]) }))
+    }
+  }
+
+  return { questions: st.questions, idx: st.idx, picked: st.picked, score: st.score, options: st.options, q, answer, next }
+}
+
 function SubjectDrill({ pattern, onAnswer }) {
-  const [round, setRound] = useState(0)
-  const questions = useMemo(() => buildSubjectDrill(pattern, 8), [pattern, round])
-  const [idx, setIdx] = useState(0)
-  const [picked, setPicked] = useState(null)
-  const [score, setScore] = useState(0)
   const [showTable, setShowTable] = useState(false)
 
-  const q = questions[idx]
-
   // 誤答は「動詞は合っているが主語が違う」「主語は合っているが動詞が違う」を混ぜる
-  const options = useMemo(() => {
-    if (!q) return []
+  const makeOptions = (q) => {
     const sameRoot = shuffle(pattern.slots.filter((s) => s.key !== q.slot.key)).slice(0, 2)
     const sameSlot = shuffle(pattern.roots.filter((r) => r.root !== q.root.root)).slice(0, 1)
     return shuffle([
@@ -92,34 +127,16 @@ function SubjectDrill({ pattern, onAnswer }) {
       ...sameRoot.map((s) => `${s.key} ${q.root.root}`),
       ...sameSlot.map((r) => `${q.slot.key} ${r.root}`),
     ])
-  }, [q, pattern])
+  }
+  const { questions, idx, picked, score, options, q, answer, next } = useDrill(
+    pattern,
+    () => buildSubjectDrill(pattern, 8),
+    makeOptions,
+    (q) => q.answer,
+    onAnswer
+  )
 
   if (!q) return null
-
-  const answer = (o) => {
-    if (picked) return
-    const ok = o === q.answer
-    if (ok) {
-      playCorrect()
-      setScore((s) => s + 1)
-    } else {
-      playWrong()
-    }
-    focusChars(q.answer).forEach((id) => onAnswer(id, ok))
-    setPicked(o)
-  }
-
-  const next = () => {
-    if (idx + 1 >= questions.length) {
-      playClear()
-      setRound((r) => r + 1)
-      setIdx(0)
-      setScore(0)
-    } else {
-      setIdx(idx + 1)
-    }
-    setPicked(null)
-  }
 
   return (
     <>
@@ -201,42 +218,16 @@ function SubjectDrill({ pattern, onAnswer }) {
 /* -------- 否定・質問: 文末の助詞を選ぶ -------- */
 
 function TransformDrill({ pattern, onAnswer }) {
-  const [round, setRound] = useState(0)
-  const questions = useMemo(() => buildTransformDrill(pattern, 6), [pattern, round])
-  const [idx, setIdx] = useState(0)
-  const [picked, setPicked] = useState(null)
-  const [score, setScore] = useState(0)
-
-  const q = questions[idx]
-  // 助詞の入れ替えで誤答が作れない型(強調など)は、データ側の options を使う
-  const options = useMemo(() => (q ? (q.options ? shuffle(q.options) : tailOptions(q.to)) : []), [q])
+  const { questions, idx, picked, score, options, q, answer, next } = useDrill(
+    pattern,
+    () => buildTransformDrill(pattern, 6),
+    // 助詞の入れ替えで誤答が作れない型(強調など)は、データ側の options を使う
+    (q) => (q.options ? shuffle(q.options) : tailOptions(q.to)),
+    (q) => q.to,
+    onAnswer
+  )
 
   if (!q) return null
-
-  const answer = (o) => {
-    if (picked) return
-    const ok = o === q.to
-    if (ok) {
-      playCorrect()
-      setScore((s) => s + 1)
-    } else {
-      playWrong()
-    }
-    focusChars(q.to).forEach((id) => onAnswer(id, ok))
-    setPicked(o)
-  }
-
-  const next = () => {
-    if (idx + 1 >= questions.length) {
-      playClear()
-      setRound((r) => r + 1)
-      setIdx(0)
-      setScore(0)
-    } else {
-      setIdx(idx + 1)
-    }
-    setPicked(null)
-  }
 
   return (
     <>
