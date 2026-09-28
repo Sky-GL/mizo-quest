@@ -74,3 +74,22 @@
 {"id":"ka_hmangaih","mizo":"Ka hmangaih che.","kana":"カ フマンガイ チェ","ja":"愛しています。","literal":"私は・愛する・あなたを","note":"hmangaihna(愛)の動詞形。che=あなたを。Ka lawmpui che の che と同じ。","scene":"feel","level":2}
 {"id":"a_nuihzathlak","mizo":"A nuihzathlak hle mai!","kana":"ア ヌイザトラク レ マイ","ja":"めっちゃ面白い!","literal":"それは・おかしい・とても","note":"★hle mai が「とても」。em em と同じ働きで、こちらのほうが口語的。","scene":"feel","level":3}
 {"id":"a_tui_hle_mai","mizo":"A tui hle mai!","kana":"ア トゥイ レ マイ","ja":"すごくおいしい!","literal":"それは・おいしい・とても","note":"A tui e(おいしい)に hle mai を足しただけ。強調は後ろに足す、が分かる例。","scene":"feel","level":2}
+{"id":"bazar_kal_duh","mizo":"Bazar ah ka kal duh.","kana":"バザール ア カ カル ドゥ","ja":"市場へ行きたいです。","literal":"市場・へ・私は・行く・ほしい","note":"行き先 + ah + ka kal duh。「〜へ行きたい」の型。ah は Naktuk ah(明日に)と同じ。","scene":"taxi","level":2}
+{"id":"kal_ang","mizo":"Kal ang.","kana":"カル アン","ja":"行きましょう。","literal":"行く・しよう","note":"主語を付けずに ang だけで「行こう」。運転手も乗る側も使う。","scene":"taxi","level":1}
+{"id":"ka_chhuk","mizo":"Hetah hian ka chhuk ang e.","kana":"ヘタ ヒアン カ チュック アン エ","ja":"ここで降ります。","literal":"ここ・で・私は・降りる・しよう・よ","note":"chhuk=降りる。hetah hian=ここで。降りたい場所で言う。","scene":"taxi","level":3}
+{"id":"pawisa_la","mizo":"Pawisa la rawh.","kana":"ポイサ ラ ロ","ja":"お金をどうぞ。","literal":"お金・取る・ください","note":"pawisa=お金。la=取る。支払うときに差し出しながら。★AW。","scene":"taxi","level":2}
+{"id":"min_thlah","mizo":"Min thlah a, ka lawm hle mai.","kana":"ミン トラ ア カ ロム レ マイ","ja":"降ろしてくれてありがとう。","literal":"私を・降ろす・ので・私は・うれしい・とても","note":"min=私を。Ka lawm e の丁寧で気持ちのこもった形。hle mai=とても。","scene":"taxi","level":3}
+{"id":"ka_pi_chibai","mizo":"Ka Pi, chibai.","kana":"カ ピ チバイ","ja":"すみません(女性に)。","literal":"私の・おばさん・こんにちは","note":"Pi=年上の女性への敬称。店や道で声をかけるときの入り方。男性には Pu。","scene":"order","level":1}
+{"id":"chaw_ka_duh","mizo":"Chaw ka duh.","kana":"チョ カ ドゥ","ja":"ごはんをください。","literal":"ごはん・私は・ほしい","note":"Tui ka duh(水がほしい)と同じ型。ほしいものを頭に置くだけ。★AW。","scene":"order","level":1}
+{"id":"engzat_man","mizo":"Engzat man nge?","kana":"エンザット マン ンゲ","ja":"いくらですか?","literal":"いくら・値段・か","note":"man=値段。Hei hi engzat nge? より値段を聞いているのがはっきりする。","scene":"order","level":2}
+{"id":"he_hi_lei","mizo":"He chaw hi ka lei duh.","kana":"ヘ チョ ヒ カ レイ ドゥ","ja":"これをください。","literal":"この・ごはん・を・私は・買う・ほしい","note":"He 〜 hi で「この〜」。chaw の部分を品物に入れ替えれば何にでも使える。","scene":"order","level":3}
+{"id":"chaw_ei_tawh","mizo":"Chaw ka ei tawh.","kana":"チョ カ エイ トウ","ja":"もう食べました。","literal":"ごはん・私は・食べる・した","note":"★tawh が「もう〜した」。動詞の後ろに足すだけ。lo(ない)と同じ位置。","scene":"order","level":2}
+{"id":"chaw_la_ei_lo","mizo":"Chaw ka la ei lo.","kana":"チョ カ ラ エイ ロ","ja":"まだ食べていません。","literal":"ごはん・私は・まだ・食べる・ない","note":"★la 〜 lo で「まだ〜ない」。lo の前に la を足すだけ。tawh(もう〜した)の裏返し。","scene":"order","level":3}
+{"id":"ka_pu_chibai","mizo":"Ka Pu, chibai.","kana":"カ プ チバイ","ja":"すみません(男性に)。","literal":"私の・おじさん・こんにちは","note":"Pu=年上の男性への敬称。女性には Pi。いきなり Chibai だけより丁寧。","scene":"origin","level":1}
+{"id":"khawi_atanga","mizo":"Khawi atanga lo kal nge i nih?","kana":"コイ アタンガ ロ カル ンゲ イ ニ","ja":"どこから来ましたか?","literal":"どこ・から・来る・か・あなたは・である","note":"atanga=〜から。lo kal=来る(kal=行く に lo が付くと「来る」になる)。★AW。","scene":"origin","level":3}
+{"id":"japan_atanga","mizo":"Japan atanga ka lo kal.","kana":"ジャパン アタンガ カ ロ カル","ja":"日本から来ました。","literal":"日本・から・私は・来る","note":"国名を入れ替えるだけ。Japan mi ka ni(日本人です)と並べて使える。","scene":"origin","level":2}
+{"id":"khawnge_in","mizo":"Khawnge i in a awm?","kana":"コンゲ イ イン ア オム","ja":"お住まいはどこですか?","literal":"どこ・あなたの・家・それは・ある","note":"khawnge は khawiah nge の短い言い方。in=家。★AW。","scene":"origin","level":3}
+{"id":"hotel_tha_ber","mizo":"Hotel ṭha ber khawnge?","kana":"ホテル タ ベル コンゲ","ja":"一番いいホテルはどこですか?","literal":"ホテル・よい・最も・どこ","note":"★ber が「一番」。A ṭha e(よい)の ṭha の後ろに足すだけ。★Ṭ。","scene":"stay","level":2}
+{"id":"hotel_hnai_ber","mizo":"Hotel hnai ber khawnge?","kana":"ホテル ナイ ベル コンゲ","ja":"一番近いホテルはどこですか?","literal":"ホテル・近い・最も・どこ","note":"hnai=近い。hla(遠い)の反対。ber を付けて「一番近い」。","scene":"stay","level":2}
+{"id":"a_tha_ber","mizo":"A ṭha ber a ni.","kana":"ア タ ベル ア ニ","ja":"これが一番です。","literal":"それは・よい・最も・である","note":"ber は形容詞の後ろ。em em(とても)や hle mai(とても)と同じ位置に来る。","scene":"stay","level":2}
+{"id":"inthiar","mizo":"Inthiar lawk ka duh.","kana":"インティアル ロク カ ドゥ","ja":"お手洗いに行きたいです。","literal":"用を足す・ちょっと・私は・ほしい","note":"lawk=ちょっと/先に。困ったときのために覚えておく一言。★AW。","scene":"stay","level":3}
