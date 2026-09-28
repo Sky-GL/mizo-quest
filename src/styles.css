@@ -749,3 +749,32 @@ body {
   .pick-ja { font-size: 20px; }
   .talk-scenes { grid-template-columns: repeat(2, minmax(0, 200px)); }
 }
+
+
+/* ===== コピーボタン ===== */
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+  background: var(--panel-2); border: 1px solid var(--line); color: var(--muted);
+  border-radius: 999px; padding: 7px 12px; font-size: 14px; font-weight: 700;
+  transition: border-color .15s ease, color .15s ease, background .15s ease;
+  line-height: 1;
+}
+.copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+.copy-btn.sm { padding: 6px 10px; font-size: 13px; }
+.copy-btn.done { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.copy-btn.fail { border-color: var(--c-wrong, #d9534f); color: var(--c-wrong, #d9534f); }
+.copy-icon { font-size: 15px; line-height: 1; }
+.copy-label { white-space: nowrap; }
+
+/* フレーズカードの右上に置く。カード本体の開閉ボタンとは別要素 */
+.phrase-item { position: relative; }
+.phrase-item > .copy-btn {
+  position: absolute; top: 9px; right: 10px; z-index: 1;
+  padding: 5px 8px; border-color: transparent; background: transparent;
+}
+.phrase-item > .copy-btn:hover,
+.phrase-item > .copy-btn.done { background: var(--panel-2); border-color: var(--line); }
+/* コピーと開閉キャレットが重ならないよう頭の右側を空ける */
+.phrase-head { padding-right: 76px !important; }
+.ph-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.fc-actions { display: flex; align-items: center; gap: 10px; justify-content: center; flex-wrap: wrap; }

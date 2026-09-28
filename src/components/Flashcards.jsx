@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { charsOfStep, stepMeta, TONE_STEP, SHORT_TONE_STEP, toneShape } from '../data/steps'
 import { pairsOf } from '../data/pairs'
 import SpeakButton from './SpeakButton'
+import CopyButton from './CopyButton'
 import SoundPair from './SoundPair'
 import ToneCurve from './ToneCurve'
 import { speak } from '../lib/speech'
@@ -88,7 +89,10 @@ export default function Flashcards({ step, onQuiz, onBack, onToneLab }) {
               <div className="read-row"><span className="rl">種類</span><span className="rv">{GROUP_LABEL[c.group] || c.group}</span></div>
             </div>
             <p className="note">{c.note}</p>
-            <SpeakButton char={c} />
+            <div className="fc-actions">
+              <SpeakButton char={c} />
+              <CopyButton text={c.letter} label="コピー" />
+            </div>
           </div>
         </div>
       </div>

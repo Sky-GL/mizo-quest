@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { pickWords, charsOfWord, shuffle } from '../data/words'
 import SpeakButton from './SpeakButton'
+import CopyButton from './CopyButton'
 import { speakText, speakSequence, stopSpeaking, RATE } from '../lib/speech'
 import { playCorrect, playWrong, playClear } from '../lib/sfx'
 
@@ -145,6 +146,7 @@ export default function WordMode({ learnedIds, onBack, onAnswer }) {
         <div className="word-actions">
           <button className="btn secondary" onClick={playAlong}>🔉 1字ずつ読む</button>
           <SpeakButton text={word.word} label="通しで聞く" />
+          <CopyButton text={word.word} label="コピー" />
         </div>
 
         {/* 解答前は答えを開けないようにする(意味あてのカンニングになるため) */}

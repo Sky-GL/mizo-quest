@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import SpeakButton from './SpeakButton'
+import CopyButton from './CopyButton'
 import { speakSequence, stopSpeaking, RATE } from '../lib/speech'
 import { playCorrect, playWrong, playClear } from '../lib/sfx'
 import { charScore } from '../lib/srs'
@@ -255,6 +256,7 @@ function ReadStage({ scene, phrases, rate, slow, onToggleSlow, onNext }) {
               <div className="bubble-mizo">
                 {lineText(line)}
                 <SpeakButton text={lineText(line)} size="sm" rate={rate} />
+                <CopyButton text={lineText(line)} size="sm" />
               </div>
               <div className="bubble-ja">{lineJa(line)}</div>
             </div>
@@ -276,6 +278,7 @@ function ReadStage({ scene, phrases, rate, slow, onToggleSlow, onNext }) {
       <div className="phrase-list">
         {phrases.map((p) => (
           <div key={p.id} className={`phrase-item ${open === p.id ? 'open' : ''}`}>
+            <CopyButton text={p.mizo} size="sm" />
             <button className="phrase-head" onClick={() => setOpen(open === p.id ? null : p.id)}>
               {/* ミゾ語・カナ・意味を縦に積む。横に離すと視線が長く動いて読みにくい */}
               <span className="ph-main">
@@ -298,7 +301,10 @@ function ReadStage({ scene, phrases, rate, slow, onToggleSlow, onNext }) {
                     語の意味と組み立て方は確認できていますが、これが自然な言い方かは未確認です。
                   </p>
                 )}
-                <SpeakButton text={p.mizo} size="sm" rate={rate} />
+                <span className="ph-actions">
+                  <SpeakButton text={p.mizo} size="sm" rate={rate} />
+                  <CopyButton text={p.mizo} size="sm" label="コピー" />
+                </span>
               </div>
             )}
           </div>
@@ -379,6 +385,7 @@ function PickStage({ phrases, phraseStats, rate, onRecord, onNext }) {
           <p className="fb-note">{target.note}</p>
           <div className="cta-row">
             <SpeakButton text={target.mizo} size="sm" rate={rate} />
+            <CopyButton text={target.mizo} size="sm" label="コピー" />
             <button className="btn primary" onClick={next} autoFocus>
               {idx + 1 >= queue.length ? `会話してみる(${score}/${queue.length}正解) →` : '次へ →'}
             </button>
@@ -427,6 +434,7 @@ function ActStage({ scene, rate, onRecord, onNext }) {
               <div className="bubble-mizo">
                 {lineText(line)}
                 <SpeakButton text={lineText(line)} size="sm" rate={rate} />
+                <CopyButton text={lineText(line)} size="sm" />
               </div>
               <div className="bubble-ja">{lineJa(line)}</div>
             </div>
@@ -519,6 +527,7 @@ function TurnBuilder({ line, rate, isLast, onDone }) {
           <p className="fb-kana">{answer} — {kana}</p>
           <div className="cta-row">
             <SpeakButton text={answer} size="sm" label="聞く" rate={rate} />
+            <CopyButton text={answer} size="sm" label="コピー" />
             {/* 間違えた場合は不正解として記録する(SRSで優先的に出し直すため) */}
             <button className="btn primary" onClick={() => onDone(!missed)} autoFocus>
               {isLast ? 'この場面を終える →' : '会話を続ける →'}
