@@ -18,11 +18,13 @@ const tailOptions = (correct) => {
 
 /**
  * パターン練習。フレーズを1つずつ覚えるのではなく、
- * 「主語の付け方」「否定の作り方」「質問の作り方」の3つの型を身につける。
+ * 主語・否定・質問・程度・時・語順・お願い・後置詞の型を身につける。
  * 型が入ると、覚えたフレーズを自分で作り変えられるようになる。
  */
-export default function PatternDrill({ onBack, onAnswer }) {
-  const [patternId, setPatternId] = useState(PATTERNS[0].id)
+export default function PatternDrill({ onBack, onAnswer, onGrammar, initial }) {
+  const [patternId, setPatternId] = useState(
+    PATTERNS.some((p) => p.id === initial) ? initial : PATTERNS[0].id
+  )
   const pattern = PATTERNS.find((p) => p.id === patternId)
 
   return (
@@ -36,6 +38,9 @@ export default function PatternDrill({ onBack, onAnswer }) {
             <p>フレーズを増やすより、作り方の型を覚えるほうが早い。</p>
           </div>
         </div>
+        {onGrammar && (
+          <button className="btn sm secondary gm-link" onClick={onGrammar}>📖 文法のしくみ</button>
+        )}
       </div>
 
       <div className="stage-row">
@@ -242,7 +247,7 @@ function TransformDrill({ pattern, onAnswer }) {
 
       <div className="pick-card transform">
         <div className="tf-from">
-          <span className="tf-label">もとの文</span>
+          <span className="tf-label">{pattern.fromLabel || 'もとの文'}</span>
           <strong>{q.from}</strong>
           <small>{q.fromJa}</small>
         </div>

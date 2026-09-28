@@ -778,3 +778,77 @@ body {
 .phrase-head { padding-right: 76px !important; }
 .ph-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .fc-actions { display: flex; align-items: center; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+/* ===== 文法のしくみ ===== */
+.mode-card.grammar { background: color-mix(in srgb, var(--c-pattern) 10%, transparent); border-color: color-mix(in srgb, var(--c-pattern) 35%, transparent); }
+.gm-link { margin-left: auto; align-self: center; }
+.screen-head { flex-wrap: wrap; }
+
+.gm-section { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px 18px 16px; margin-bottom: 16px; }
+.gm-section h3 { font-size: 20px; margin: 0 0 12px; }
+.gm-lead { font-size: 16px; color: var(--muted); margin: -4px 0 12px; }
+.gm-note { font-size: 16px; color: var(--muted); line-height: 1.8; margin: 12px 0 0; }
+.gm-note strong { color: var(--text); font-family: "Noto Serif", Georgia, serif; }
+
+/* ① 骨組み */
+.gm-frame { display: flex; align-items: stretch; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.gm-box {
+  flex: 1 1 110px; max-width: 170px; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  border-radius: 12px; padding: 12px 8px; border: 2px solid var(--line); background: var(--panel-2);
+}
+.gm-box small { font-size: 13px; color: var(--muted); font-weight: 700; }
+.gm-box strong { font-size: 28px; font-family: "Noto Serif", Georgia, serif; line-height: 1.2; }
+.gm-box em { font-size: 15px; font-style: normal; color: var(--muted); }
+.gm-box.subj { border-color: color-mix(in srgb, var(--step-2) 60%, transparent); }
+.gm-box.verb { border-color: color-mix(in srgb, var(--accent) 70%, transparent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.gm-box.tail { border-color: color-mix(in srgb, var(--step-5) 60%, transparent); }
+.gm-box.obj { border-color: color-mix(in srgb, var(--step-3) 60%, transparent); }
+.gm-plus { align-self: center; font-size: 22px; font-weight: 800; color: var(--muted); }
+.gm-result { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 14px 0 4px; }
+.gm-result-mizo { font-size: 26px; font-weight: 700; font-family: "Noto Serif", Georgia, serif; }
+.gm-result-ja { font-size: 17px; color: var(--muted); }
+.gm-points { margin: 12px 0 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; }
+.gm-points li { font-size: 16px; line-height: 1.7; color: var(--muted); }
+.gm-points strong { color: var(--text); }
+
+/* ② 作り変え */
+.gm-grow { display: flex; flex-direction: column; gap: 8px; }
+.gm-step {
+  display: grid; grid-template-columns: 34px 1fr auto auto; align-items: center; gap: 12px;
+  padding: 10px 12px; border-radius: 12px; background: var(--panel-2); border: 1px solid var(--line-soft);
+}
+.gm-step-no {
+  width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+  background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); font-weight: 800; font-size: 15px;
+}
+.gm-step-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.gm-step-mizo { font-size: 22px; font-weight: 700; font-family: "Noto Serif", Georgia, serif; }
+.gm-step-ja { font-size: 15px; color: var(--muted); }
+.gm-step-add {
+  font-size: 14px; font-weight: 700; color: var(--accent); white-space: nowrap;
+  background: color-mix(in srgb, var(--accent) 10%, transparent); border-radius: 999px; padding: 5px 10px;
+}
+.gm-step-go { display: flex; gap: 6px; align-items: center; }
+
+/* ③〜⑤ 一覧 */
+.gm-table { display: flex; flex-direction: column; gap: 8px; }
+.gm-row {
+  display: grid; grid-template-columns: 150px 1fr 1.4fr 150px; align-items: center; gap: 12px;
+  padding: 10px 12px; border-radius: 12px; background: var(--panel-2); border: 1px solid var(--line-soft);
+}
+.gm-tag { font-size: 20px; font-weight: 800; font-family: "Noto Serif", Georgia, serif; color: var(--accent); }
+.gm-mean { font-size: 16px; }
+.gm-ex { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.gm-ex-mizo { font-size: 18px; font-weight: 700; font-family: "Noto Serif", Georgia, serif; }
+.gm-ex-ja { font-size: 14px; color: var(--muted); }
+.gm-go { display: flex; gap: 6px; align-items: center; justify-content: flex-end; }
+
+@media (max-width: 680px) {
+  .gm-row { grid-template-columns: 1fr auto; grid-template-areas: "tag go" "mean mean" "ex ex"; gap: 6px 10px; }
+  .gm-tag { grid-area: tag; } .gm-go { grid-area: go; } .gm-mean { grid-area: mean; } .gm-ex { grid-area: ex; }
+  .gm-step { grid-template-columns: 30px 1fr auto; }
+  .gm-step-add { grid-column: 2 / 4; justify-self: start; }
+  .gm-plus { display: none; }
+  .gm-box { flex: 1 1 40%; }
+  .gm-link { margin-left: 0; }
+}

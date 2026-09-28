@@ -12,7 +12,7 @@ const Stars = ({ n }) => (
   </span>
 )
 
-export default function StepMap({ progress, onSelect, onReview, onWords, onMemory, onChallenge, onTalk, onPattern }) {
+export default function StepMap({ progress, onSelect, onReview, onWords, onMemory, onChallenge, onTalk, onPattern, onGrammar }) {
   const learnedCount = Object.values(progress.chars).length
   const weakCount = Object.values(progress.chars).filter((c) => c.wrong > 0).length
   const sceneDone = Object.values(progress.scenes || {}).filter((s) => s.done).length
@@ -52,7 +52,14 @@ export default function StepMap({ progress, onSelect, onReview, onWords, onMemor
           <span className="mode-emoji">🧩</span>
           <strong>パターン練習</strong>
           <span className="mode-sub">
-            主語・否定・質問の3つの型。覚えた文を自分で作り変えられるようになる
+            8つの型を4択で。覚えた文を自分で作り変えられるようになる
+          </span>
+        </button>
+        <button className="mode-card grammar" onClick={onGrammar}>
+          <span className="mode-emoji">📖</span>
+          <strong>文法のしくみ</strong>
+          <span className="mode-sub">
+            文の組み立てを1枚で。前に付けるもの・後ろに足すものの一覧
           </span>
         </button>
       </div>

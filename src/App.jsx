@@ -9,6 +9,7 @@ import MemoryGame from './components/MemoryGame'
 import Challenge from './components/Challenge'
 import TalkMode from './components/TalkMode'
 import PatternDrill from './components/PatternDrill'
+import GrammarMap from './components/GrammarMap'
 import { useProgress } from './hooks/useProgress'
 import { buildStepQuiz, buildReviewQuiz } from './lib/quiz'
 import { stepMeta, TONE_STEP } from './data/steps'
@@ -25,7 +26,7 @@ export default function App() {
     reset,
     dismissMigration,
   } = useProgress()
-  // view: { name: 'map' | 'cards' | 'quiz' | 'lab' | 'review' | 'words' | 'memory' | 'challenge' | 'talk' | 'pattern', step?, questions? }
+  // view: { name: 'map' | 'cards' | 'quiz' | 'lab' | 'review' | 'words' | 'memory' | 'challenge' | 'talk' | 'pattern' | 'grammar', step?, questions?, patternId? }
   const [view, setView] = useState({ name: 'map' })
 
   // 一度でも解答した文字のID集合(単語モード/神経衰弱の出題範囲に使う)
@@ -70,6 +71,7 @@ export default function App() {
             onChallenge={() => setView({ name: 'challenge', key: Date.now() })}
             onTalk={() => setView({ name: 'talk', key: Date.now() })}
             onPattern={() => setView({ name: 'pattern', key: Date.now() })}
+            onGrammar={() => setView({ name: 'grammar' })}
           />
         )}
 
@@ -86,7 +88,20 @@ export default function App() {
         )}
 
         {view.name === 'pattern' && (
-          <PatternDrill key={view.key} onBack={goMap} onAnswer={recordAnswer} />
+          <PatternDrill
+            key={view.key}
+            initial={view.patternId}
+            onBack={goMap}
+            onAnswer={recordAnswer}
+            onGrammar={() => setView({ name: 'grammar' })}
+          />
+        )}
+
+        {view.name === 'grammar' && (
+          <GrammarMap
+            onBack={goMap}
+            onPractice={(patternId) => setView({ name: 'pattern', patternId, key: Date.now() })}
+          />
         )}
 
         {view.name === 'words' && (
