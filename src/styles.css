@@ -939,3 +939,10 @@ body {
 .ra-conf.low { color: var(--c-talk); }
 .ra-ai-line { display: flex; flex-direction: column; gap: 2px; margin-bottom: 10px; }
 .ra-ai-line strong { font-size: 18px; color: var(--accent); }
+
+/* --- 返信アシスト: わからなかった文 --- */
+.ra-save { margin: 4px 0 6px; }
+.ra-unknown { margin-top: 26px; background: var(--panel); border: 1px dashed var(--line); border-radius: var(--radius); padding: 14px; }
+.ra-unknown .ra-h { margin-top: 0; }
+.ra-unknown ul { list-style: none; padding: 0; margin: 8px 0 12px; display: flex; flex-direction: column; gap: 6px; }
+.ra-unknown li { display: flex; align-items: center; gap: 8px; justify-content: space-between; font-size: 18px; font-family: "Noto Serif", Georgia, serif; overflow-wrap: anywhere; }

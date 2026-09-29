@@ -5,6 +5,9 @@ import { usePersistentState } from '../hooks/usePersistentState'
 import { RATE } from '../lib/speech'
 import { analyze, replyText, replyJa, replyKana, RESCUE, googleTranslateUrl } from '../data/replies'
 
+// AI欄(api/reply.js)は当面使わない。照合で出なかった文を集めてフレーズを増やす方針
+const AI_ENABLED = false
+
 const EXAMPLES = ['Chibai! I dam em?', 'Chaw i ei tawh em?', 'Khawi atanga lo kal nge i nih?', 'Naktuk ah kan inhmu dawn nia.']
 
 /**
@@ -15,6 +18,8 @@ export default function ReplyAssist({ onBack }) {
   // 入力は端末に残す(アプリを行き来しても消えない)
   const [text, setText] = usePersistentState('reply:text', '', (v) => typeof v === 'string')
   const [pasteMsg, setPasteMsg] = useState('')
+  // 意味が出なかった文。まとめてコピーして送ってもらい、フレーズを足す材料にする
+  const [unknown, setUnknown] = usePersistentState('reply:unknown', [], (v) => Array.isArray(v))
   const result = useMemo(() => (text.trim() ? analyze(text) : null), [text])
 
   const paste = async () => {
@@ -64,14 +69,22 @@ export default function ReplyAssist({ onBack }) {
         )}
       </div>
 
-      {result && <AiPanel text={text} understood={result.understood} />}
+      {AI_ENABLED && result && <AiPanel text={text} understood={result.understood} />}
 
       {result && (
         <>
-          <h3 className="ra-h">📖 アプリ内のフレーズで照合</h3>
+          <h3 className="ra-h">📖 相手はこう言っています</h3>
           {result.sentences.map((s, i) => (
             <Sentence key={i} s={s} />
           ))}
+
+          {result.sentences.some((s) => !(s.matches[0]?.score >= 0.6)) && (
+            <SaveUnknown
+              sentences={result.sentences.filter((s) => !(s.matches[0]?.score >= 0.6)).map((s) => s.text)}
+              unknown={unknown}
+              setUnknown={setUnknown}
+            />
+          )}
 
           <h3 className="ra-h">💬 返事の候補 <small>タップでコピー</small></h3>
           {!result.understood && (
@@ -98,6 +111,46 @@ export default function ReplyAssist({ onBack }) {
           </p>
         </>
       )}
+
+      {unknown.length > 0 && <UnknownList unknown={unknown} setUnknown={setUnknown} />}
+    </div>
+  )
+}
+
+/** 照合で意味が出なかった文を「わからなかった文」に保存するボタン */
+function SaveUnknown({ sentences, unknown, setUnknown }) {
+  const fresh = sentences.filter((t) => !unknown.includes(t))
+  if (!fresh.length) return <p className="ra-note">📝 この文は「わからなかった文」に保存済みです。</p>
+  return (
+    <button
+      className="btn secondary ra-save"
+      onClick={() => setUnknown((l) => [...l, ...fresh].slice(-100))}
+    >
+      📝 意味が出なかった文を保存({fresh.length}文)
+    </button>
+  )
+}
+
+/** 保存した文の一覧。まとめてコピーしてClaudeに送ると、フレーズとして追加できる */
+function UnknownList({ unknown, setUnknown }) {
+  const all = unknown.map((t) => `・${t}`).join('\n')
+  const copyText = `返信アシストで意味が出なかった文です。フレーズに追加してください。\n${all}`
+  return (
+    <div className="ra-unknown">
+      <h3 className="ra-h">📝 わからなかった文 <small>{unknown.length}文</small></h3>
+      <p className="ra-note">まとめてコピーして送ってもらえれば、意味と返事を調べてアプリに追加します。</p>
+      <ul>
+        {unknown.map((t) => (
+          <li key={t}>
+            <span>{t}</span>
+            <button className="btn ghost sm" onClick={() => setUnknown((l) => l.filter((x) => x !== t))} title="削除">✕</button>
+          </li>
+        ))}
+      </ul>
+      <div className="ra-input-actions">
+        <CopyButton text={copyText} label="まとめてコピー" />
+        <button className="btn ghost" onClick={() => window.confirm('一覧を空にしますか?') && setUnknown([])}>全部消す</button>
+      </div>
     </div>
   )
 }
