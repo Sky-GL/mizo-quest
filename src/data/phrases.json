@@ -47,6 +47,7 @@
 {"id": "i_damlo_em", "mizo": "I damlo em?", "kana": "イ ダムロ エム", "ja": "具合が悪いのですか?", "literal": "あなたは・健康でない・か", "note": "dam(健康)+ lo(ない)がくっついて damlo=病気。否定の型がそのまま単語になっている好例。", "scene": "health", "level": 2}
 {"id": "ka_damlo", "mizo": "Ka damlo.", "kana": "カ ダムロ", "ja": "具合が悪いです。", "literal": "私は・健康でない", "note": "Ka dam e(元気です)のちょうど裏返し。この2つは対で覚える。", "scene": "health", "level": 1}
 {"id": "damdawi_duh", "mizo": "Damdawi i duh em?", "kana": "ダムドイ イ ドゥ エム", "ja": "薬はいりますか?", "literal": "薬・あなたは・ほしい・か", "note": "damdawi=薬。dam(健康)から来た語。★AW。", "scene": "health", "level": 2}
+{"id": "engtin_i_nih", "mizo": "Engtin nge i nih?", "kana": "エンティン ゲ イ ニ", "ja": "どうしたの?", "literal": "どう・か・あなたは・である", "note": "相手の様子がおかしいときに。engtin=どう、nge=〜か、i nih=あなたは〜である。直訳「あなたはどうなっているの?」。Min hrilh rawh(教えて)を続けると心配している気持ちが伝わる。", "scene": "health", "level": 2, "uncertain": true}
 {"id": "khua_a_tha", "mizo": "Vawiin khua a ṭha e.", "kana": "ヴォイン クア ア タ エ", "ja": "今日はいい天気ですね。", "literal": "今日・天気・それは・よい・ね", "note": "khua=天気/その場の様子。A ṭha e をそのまま天気に使い回している。★Ṭ。", "scene": "weather", "level": 2}
 {"id": "khua_a_lum", "mizo": "Khua a lum.", "kana": "クア ア ルム", "ja": "暑いです。", "literal": "天気・それは・暑い", "note": "lum=暑い/温かい。主語は khua(天気)。", "scene": "weather", "level": 2}
 {"id": "khua_tha_lo", "mizo": "Khua a ṭha lo.", "kana": "クア ア タ ロ", "ja": "天気が悪いです。", "literal": "天気・それは・よい・ない", "note": "A ṭha e(よい)に lo を足しただけ。否定の型がそのまま天気に使える。★Ṭ。", "scene": "weather", "level": 2}
