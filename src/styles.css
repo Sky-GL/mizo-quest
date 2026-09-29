@@ -917,3 +917,25 @@ body {
   .ra-replies { grid-template-columns: 1fr; }
   .ra-mizo { font-size: 20px; }
 }
+
+/* --- 返信アシスト: AI欄 --- */
+.ra-ai {
+  background: var(--panel); border: 1.5px solid var(--line); border-radius: var(--radius);
+  padding: 14px; margin-bottom: 18px; display: flex; flex-direction: column; gap: 10px;
+}
+.ra-ai.strong { border-color: color-mix(in srgb, var(--accent) 55%, transparent); background: color-mix(in srgb, var(--accent) 7%, var(--panel)); }
+.ra-ai-head { display: flex; flex-direction: column; gap: 2px; }
+.ra-ai-head strong { font-size: 19px; }
+.ra-ai-head span { font-size: 16px; color: var(--muted); }
+.ra-want {
+  font: inherit; font-size: 18px; color: var(--text); background: var(--bg);
+  border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 12px; width: 100%; box-sizing: border-box;
+}
+.ra-want:focus { outline: none; border-color: var(--accent); }
+.ra-msg.err { color: var(--c-talk); }
+.ra-ai-result { border-top: 1px dashed var(--line); padding-top: 10px; }
+.ra-summary { font-size: 19px; font-weight: 700; margin: 0 0 10px; }
+.ra-conf { margin-left: 8px; font-size: 14px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--bg2); color: var(--muted); }
+.ra-conf.low { color: var(--c-talk); }
+.ra-ai-line { display: flex; flex-direction: column; gap: 2px; margin-bottom: 10px; }
+.ra-ai-line strong { font-size: 18px; color: var(--accent); }

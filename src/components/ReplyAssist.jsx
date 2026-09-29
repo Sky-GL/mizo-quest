@@ -64,9 +64,11 @@ export default function ReplyAssist({ onBack }) {
         )}
       </div>
 
+      {result && <AiPanel text={text} understood={result.understood} />}
+
       {result && (
         <>
-          <h3 className="ra-h">📖 相手はこう言っています</h3>
+          <h3 className="ra-h">📖 アプリ内のフレーズで照合</h3>
           {result.sentences.map((s, i) => (
             <Sentence key={i} s={s} />
           ))}
@@ -91,7 +93,7 @@ export default function ReplyAssist({ onBack }) {
           </div>
 
           <p className="ra-note">
-            ⚠️ 機械翻訳ではなく、アプリに収録したフレーズとの照合です。知らない文は単語ごとの手がかりまでしか出せません。
+            ⚠️ この欄は機械翻訳ではなく、アプリに収録したフレーズとの照合です(通信なし)。知らない文は単語ごとの手がかりまでしか出せません。
             <a href={googleTranslateUrl(text)} target="_blank" rel="noreferrer">Google翻訳でも確認する ↗</a>
           </p>
         </>
@@ -162,6 +164,104 @@ function ReplyCard({ phrases }) {
         <CopyButton text={text} size="sm" />
       </div>
       {copied && <span className="ra-copied">✓ コピーしました</span>}
+    </div>
+  )
+}
+
+const ERR = {
+  not_configured: 'AIはまだ使えません(サーバーにAPIキーが設定されていません)。',
+  bad_key: 'APIキーが正しくないようです。',
+  passcode: '合言葉が違います。',
+  rate_limit: '混み合っています。少し待ってからもう一度押してください。',
+  too_long: '文が長すぎます(1200字まで)。',
+  refusal: 'この内容はAIが訳せませんでした。',
+}
+
+/**
+ * AI(Claude)に訳と返事を作ってもらう欄。収録外の文にも対応できる。
+ * 結果は端末に残し、同じ文なら開き直しても再表示する(もう一度APIを呼ばない)。
+ */
+function AiPanel({ text, understood }) {
+  const [want, setWant] = usePersistentState('reply:want', '', (v) => typeof v === 'string')
+  const [saved, setSaved] = usePersistentState('reply:ai', null)
+  const [pass, setPass] = usePersistentState('reply:pass', '', (v) => typeof v === 'string')
+  const [needPass, setNeedPass] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const data = saved && saved.text === text && saved.want === want ? saved.data : null
+
+  const ask = async () => {
+    setLoading(true)
+    setError('')
+    try {
+      const r = await fetch('/api/reply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...(pass ? { 'x-passcode': pass } : {}) },
+        body: JSON.stringify({ text, want }),
+      })
+      const body = await r.json().catch(() => ({}))
+      if (!r.ok) {
+        if (body.error === 'passcode') setNeedPass(true)
+        setError(ERR[body.error] || `うまくいきませんでした(${r.status})。`)
+        return
+      }
+      setNeedPass(false)
+      setSaved({ text, want, data: body })
+    } catch {
+      setError('通信できませんでした。電波を確認してください。')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className={`ra-ai ${understood ? '' : 'strong'}`}>
+      <div className="ra-ai-head">
+        <strong>🤖 AIで訳して返事を作る</strong>
+        <span>{understood ? '照合より自然な訳・返事がほしいとき' : 'アプリに無い文です。AIなら訳せます'}</span>
+      </div>
+      <input
+        className="ra-want"
+        value={want}
+        onChange={(e) => setWant(e.target.value)}
+        placeholder="言いたいこと(日本語・任意) 例: 明日なら会えるよ"
+      />
+      {needPass && (
+        <input className="ra-want" value={pass} onChange={(e) => setPass(e.target.value)} placeholder="合言葉" />
+      )}
+      <div className="ra-input-actions">
+        <button className="btn primary" onClick={ask} disabled={loading}>
+          {loading ? '考え中…' : data ? 'もう一度作る' : 'AIに聞く'}
+        </button>
+        {error && <span className="ra-msg err">{error}</span>}
+      </div>
+
+      {data && (
+        <div className="ra-ai-result">
+          <p className="ra-summary">
+            💡 {data.summary_ja}
+            {data.confidence !== 'high' && (
+              <span className={`ra-conf ${data.confidence}`}>
+                {data.confidence === 'low' ? '訳に自信が低い' : '訳はだいたい'}
+              </span>
+            )}
+          </p>
+          {data.sentences.map((s, i) => (
+            <div key={i} className="ra-ai-line">
+              <span className="ra-mizo">{s.mizo}</span>
+              <strong>{s.ja}</strong>
+              {s.note && <span className="ra-kana">{s.note}</span>}
+            </div>
+          ))}
+          <h3 className="ra-h">💬 AIの返事の候補 <small>タップでコピー</small></h3>
+          <div className="ra-replies">
+            {data.replies.map((r, i) => (
+              <ReplyCard key={i} phrases={[r]} />
+            ))}
+          </div>
+          <p className="ra-note">⚠️ AIの訳です。ミゾ語は資料が少ない言語なので、大事な内容は相手に確認してください。</p>
+        </div>
+      )}
     </div>
   )
 }
