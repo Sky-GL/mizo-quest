@@ -10,12 +10,13 @@ import Challenge from './components/Challenge'
 import TalkMode from './components/TalkMode'
 import PatternDrill from './components/PatternDrill'
 import GrammarMap from './components/GrammarMap'
+import ReplyAssist from './components/ReplyAssist'
 import { useProgress } from './hooks/useProgress'
 import { usePersistentState, readResume, writeResume, clearResume } from './hooks/usePersistentState'
 import { buildStepQuiz, buildReviewQuiz } from './lib/quiz'
 import { stepMeta, TONE_STEP } from './data/steps'
 
-const VIEW_NAMES = ['map', 'cards', 'quiz', 'lab', 'review', 'words', 'memory', 'challenge', 'talk', 'pattern', 'grammar']
+const VIEW_NAMES = ['map', 'cards', 'quiz', 'lab', 'review', 'words', 'memory', 'challenge', 'talk', 'pattern', 'grammar', 'reply']
 
 /** 保存してあった画面がいまのデータで開けるか */
 const isValidView = (v) => {
@@ -113,8 +114,11 @@ export default function App() {
             onTalk={() => setView({ name: 'talk', key: Date.now() })}
             onPattern={() => setView({ name: 'pattern', key: Date.now() })}
             onGrammar={() => setView({ name: 'grammar' })}
+            onReply={() => setView({ name: 'reply' })}
           />
         )}
+
+        {view.name === 'reply' && <ReplyAssist onBack={goMap} />}
 
         {view.name === 'talk' && (
           <TalkMode

@@ -12,7 +12,7 @@ const Stars = ({ n }) => (
   </span>
 )
 
-export default function StepMap({ progress, onSelect, onReview, onWords, onMemory, onChallenge, onTalk, onPattern, onGrammar }) {
+export default function StepMap({ progress, onSelect, onReview, onWords, onMemory, onChallenge, onTalk, onPattern, onGrammar, onReply }) {
   const learnedCount = Object.values(progress.chars).length
   const weakCount = Object.values(progress.chars).filter((c) => c.wrong > 0).length
   const sceneDone = Object.values(progress.scenes || {}).filter((s) => s.done).length
@@ -37,6 +37,16 @@ export default function StepMap({ progress, onSelect, onReview, onWords, onMemor
           {learnedCount === 0 ? 'Step1から始めよう' : '苦手を復習する'}
         </button>
       </div>
+
+      {/* チャットで届いたミゾ語にすぐ返すための入口。実際に使う場面なので一番上に置く */}
+      <button className="reply-banner" onClick={onReply}>
+        <span className="mode-emoji">📨</span>
+        <span>
+          <strong>返信アシスト</strong>
+          <span className="mode-sub">チャットで届いたミゾ語を貼る → 意味と返事の候補 → コピーして返信</span>
+        </span>
+        <span className="reply-go">→</span>
+      </button>
 
       {/* 会話は発音学習の出口なので、他のモードより先に置く */}
       <div className="mode-row talk-row">
