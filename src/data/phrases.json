@@ -56,6 +56,8 @@
 {"id": "dam_takin", "mizo": "Dam takin.", "kana": "ダム タキン", "ja": "またね。", "literal": "健康・に", "note": "dam(健康)+ takin(〜に)。「Dam takin le」とも言う。去る人にも残る人にも使える。", "scene": "bye", "level": 2}
 {"id": "mangtha", "mizo": "Mangṭha.", "kana": "マンタ", "ja": "さようなら。", "literal": "さようなら", "note": "★Ṭ。別れの定番。Dam takin(またね)と並べて覚える。", "scene": "bye", "level": 1}
 {"id": "muttui", "mizo": "Muttui le.", "kana": "ムットゥイ レ", "ja": "おやすみなさい。", "literal": "おやすみ・ね", "note": "寝る前のあいさつ。mut=眠る に由来する決まり文句で、語をばらして考えなくてよい。", "scene": "bye", "level": 2}
+{"id": "ni_hman_nuam", "mizo": "Ni hman nuam le.", "kana": "ニ フマン ヌアム レ", "ja": "よい1日を。", "literal": "日・過ごす・楽しい・ね", "note": "別れぎわのひとこと。ni=日、hman=過ごす、nuam=心地よい・楽しい(A va nuam em! の nuam)、le=〜ね。Dam takin の前後に足すとていねい。", "scene": "bye", "level": 2}
+{"id": "nang_pawh", "mizo": "Nang pawh le.", "kana": "ナン ポー レ", "ja": "あなたもね。", "literal": "あなた・も・ね", "note": "「よい1日を」「ありがとう」などへの返し。nang=あなた、pawh=〜も、le=〜ね。", "scene": "bye", "level": 2}
 {"id":"aw","mizo":"Aw.","kana":"オ","ja":"うん。","literal":"うん","note":"一番よく使う相づち。★AW。「Aw, nei e(うん、持ってるよ)」のように文の頭にも置く。","scene":"react","level":1}
 {"id":"awle","mizo":"Aw le.","kana":"オ レ","ja":"オッケー。/ わかった。","literal":"うん・ね","note":"Aw に le が付いた形。話を受けて次に進むときの一言。Muttui le の le と同じ。","scene":"react","level":1}
 {"id":"a_dik_chiah","mizo":"A dik chiah.","kana":"ア ディク チア","ja":"そのとおり。","literal":"それは・正しい・ちょうど","note":"dik=正しい。強く同意するとき。A ṭha e より踏み込んだ相づち。","scene":"react","level":2}
