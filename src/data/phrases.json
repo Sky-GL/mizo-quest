@@ -23,6 +23,8 @@
 {"id": "sawm_a_ni", "mizo": "Sawm a ni.", "kana": "ソム ア ニ", "ja": "10です。", "literal": "10・それは・である", "note": "数は pakhat(1) pahnih(2) pathum(3) … sawm(10)。単語モードで練習したもの。★AW。", "scene": "shop", "level": 2}
 {"id": "a_to_lutuk", "mizo": "A to lutuk e.", "kana": "ア ト ルトゥック エ", "ja": "高すぎます。", "literal": "それは・高い・すぎる・よ", "note": "to=(値段が)高い。lutuk=〜すぎる。「A hla lutuk lo(遠すぎない)」のように否定にも付く。", "scene": "shop", "level": 3}
 {"id": "ka_lei_ang", "mizo": "Ka lei ang.", "kana": "カ レイ アン", "ja": "買います。", "literal": "私は・買う・だろう", "note": "lei=買う。ang=〜しよう/〜だろう。Ka kal ang(行きます)と同じ ang。", "scene": "shop", "level": 2}
+{"id": "sam_tan_tur", "mizo": "Sam tan tur ka kal dawn.", "kana": "サム タン トゥル カ カル ドン", "ja": "髪を切りに行きます。", "literal": "髪・切る・ために・私は・行く・つもり", "note": "sam=髪。tan=切る(推測)。tur=〜するための。「髪を切る」の言い方そのものは公開資料で確認できていない。", "scene": "shop", "level": 2, "uncertain": true}
+{"id": "puii_tan_thei", "mizo": "Puii'n ka sam a tan thei em?", "kana": "プイーン カ サム ア タン テイ エム", "ja": "Puii が髪を切れますか?", "literal": "Puii・が・私の・髪・彼女は・切る・できる・か", "note": "Puii は人の名前(自分の相手の名前に替えて使う)。'n は主語の印。tan(切る)と thei(できる)の組み合わせは用例未確認。", "scene": "shop", "level": 2, "uncertain": true}
 {"id": "ka_hre_lo", "mizo": "Ka hre lo.", "kana": "カ フレ ロ", "ja": "わかりません。", "literal": "私は・知る・ない", "note": "知る=hria だが、lo が付くと hre に変わる。ミゾ語によくある形の変化。", "scene": "trouble", "level": 1}
 {"id": "mizo_tawng", "mizo": "Mizo ṭawng ka thiam lo.", "kana": "ミゾ トン カ ティアム ロ", "ja": "ミゾ語は話せません。", "literal": "ミゾ・語・私は・できる・ない", "note": "★Ṭ と AW が同時に来る ṭawng(言語)。「Aih, English ka thiam lo(いいえ、英語はできません)」と同じ形。", "scene": "trouble", "level": 2}
 {"id": "zawi_zawkin", "mizo": "Zawi zawiin thu sawi rawh.", "kana": "ゾイ ゾイン トゥ ソイ ロ", "ja": "ゆっくり話してください。", "literal": "ゆっくり・に・話・言う・ください", "note": "zawi zawiin=ゆっくりと。thu=話。sawi=言う。rawh=〜してください。★AWが3回出るのでAWの練習に向く。", "scene": "trouble", "level": 3}
@@ -60,6 +62,8 @@
 {"id": "nang_pawh", "mizo": "Nang pawh le.", "kana": "ナン ポー レ", "ja": "あなたもね。", "literal": "あなた・も・ね", "note": "「よい1日を」「ありがとう」などへの返し。nang=あなた、pawh=〜も、le=〜ね。", "scene": "bye", "level": 2}
 {"id":"aw","mizo":"Aw.","kana":"オ","ja":"うん。","literal":"うん","note":"一番よく使う相づち。★AW。「Aw, nei e(うん、持ってるよ)」のように文の頭にも置く。","scene":"react","level":1}
 {"id":"awle","mizo":"Aw le.","kana":"オ レ","ja":"オッケー。/ わかった。","literal":"うん・ね","note":"Aw に le が付いた形。話を受けて次に進むときの一言。Muttui le の le と同じ。","scene":"react","level":1}
+{"id": "i_hrethiam_em", "mizo": "I hrethiam em?", "kana": "イ フレティアム エム", "ja": "わかった?", "literal": "あなたは・理解する・か", "note": "説明したあとの確認に。hre=知る、thiam=できる、hrethiam=理解する。文末の em が「〜か?」。", "scene": "react", "level": 2}
+{"id": "ka_hrethiam", "mizo": "Ka hrethiam e.", "kana": "カ フレティアム エ", "ja": "わかりました。", "literal": "私は・理解する・よ", "note": "先生には Ka hrethiam e, Sir.(女性なら Pi)。ka hria は「知っている」。「Ka hrethiam e」そのままの用例は未確認。", "scene": "react", "level": 2, "uncertain": true}
 {"id":"a_dik_chiah","mizo":"A dik chiah.","kana":"ア ディク チア","ja":"そのとおり。","literal":"それは・正しい・ちょうど","note":"dik=正しい。強く同意するとき。A ṭha e より踏み込んだ相づち。","scene":"react","level":2}
 {"id":"i_ti_tak_tak","mizo":"I ti tak tak em?","kana":"イ ティ タク タク エム","ja":"マジですか?","literal":"あなたは・言う・本当に・本当に・か","note":"tak tak と繰り返して「本当に本当に」。驚いて聞き返すときの定番。","scene":"react","level":2}
 {"id":"ka_ring_lo","mizo":"Ka ring lo.","kana":"カ リン ロ","ja":"信じられない。","literal":"私は・信じる・ない","note":"ring=信じる。また否定の lo。Ka ring lo emai. と言うとさらに強い。","scene":"react","level":2}

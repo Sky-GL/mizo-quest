@@ -43,7 +43,7 @@ const CORE = {
   hi: 'これ(を)', he: 'この', hei: 'これ', chu: '〜は', hle: 'とても', mai: '(強め)', ber: '最も', leh: '〜と',
   ni: '〜である/日', nia: '〜だね', aw: 'うん/〜ね', le: '〜ね', va: 'なんと', hian: '〜で(ここ)',
   eng: '何', engnge: '何か', engzat: 'いくつ/いくら', engtikah: 'いつ', khawiah: 'どこに', khawi: 'どこ',
-  khawnge: 'どこ', engtia: 'どのくらい', engtin: 'どう・どのように', pawh: '〜も', hman: '過ごす・使う', nuam: '心地よい・楽しい', nih: '〜である', nang: 'あなた', nangmah: 'あなたは?', kei: '私', keimah: '私は',
+  khawnge: 'どこ', engtia: 'どのくらい', engtin: 'どう・どのように', pawh: '〜も', sam: '髪', tan: '切る', tichuan: 'それから', tur: '〜するための', hrethiam: '理解する', hman: '過ごす・使う', nuam: '心地よい・楽しい', nih: '〜である', nang: 'あなた', nangmah: 'あなたは?', kei: '私', keimah: '私は',
   tak: '本当に', takin: '〜に(しっかり)', tur: '〜するための', thei: '〜できる', duh: 'ほしい/〜したい',
   kal: '行く', ei: '食べる', awm: 'ある/いる', nei: '持つ', hre: '知る', hria: '知る',
 }
@@ -162,6 +162,8 @@ const R = {
   muttui: [['muttui']],
   aw: [['a_tha_e'], ['ka_lawm_e']],
   awle: [['a_tha_e'], ['ka_lawm_e']],
+  i_hrethiam_em: [['ka_hrethiam'], ['ka_hre_lo'], ['awle']],
+  ka_hrethiam: [['a_tha_e'], ['awle']],
   a_ni: [['a_tha_e'], ['awle']],
   a_ni_lo: [['awle'], ['ka_hre_lo']],
   aih: [['awle']],
